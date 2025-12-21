@@ -1,0 +1,18 @@
+[
+  {
+    "id": "p1",
+    "title": "Portfolio Starter",
+    "description": "Minimal React + Tailwind portfolio template with performance best practices.",
+    "tech": ["React", "Vite", "Tailwind"],
+    "repo": "https://github.com/your/repo",
+    "live": "https://your-site.example"
+  },
+  {
+    "id": "p2",
+    "title": "Project Two",
+    "description": "Short description of project two and its impact.",
+    "tech": ["Node", "Express"],
+    "repo": "https://github.com/your/repo2",
+    "live": "https://project-two.example"
+  }
+]
