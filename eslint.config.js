@@ -14,14 +14,14 @@ export default defineConfig([
     extends: [
       js.configs.recommended,
       reactHooks.configs.flat.recommended,
-      reactRefresh.configs.vite
+      reactRefresh.configs.vite,
     ],
     // NOTE: do NOT include reactRefresh here to avoid duplicate plugin registration
     plugins: {
       react,
       "react-hooks": reactHooks,
       "jsx-a11y": jsxA11y,
-      import: importPlugin
+      import: importPlugin,
     },
     languageOptions: {
       ecmaVersion: 2020,
@@ -29,8 +29,8 @@ export default defineConfig([
       parserOptions: {
         ecmaVersion: "latest",
         ecmaFeatures: { jsx: true },
-        sourceType: "module"
-      }
+        sourceType: "module",
+      },
     },
     rules: {
       "no-unused-vars": ["error", { varsIgnorePattern: "^[A-Z_]" }],
@@ -39,25 +39,41 @@ export default defineConfig([
       "import/order": [
         "warn",
         {
-          groups: ["builtin", "external", "internal", "parent", "sibling", "index"],
-          "newlines-between": "always"
-        }
+          groups: [
+            "builtin",
+            "external",
+            "internal",
+            "parent",
+            "sibling",
+            "index",
+          ],
+          "newlines-between": "always",
+        },
       ],
       "import/no-unresolved": "error",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
-      "jsx-a11y/alt-text": "warn"
+      "jsx-a11y/alt-text": "warn",
     },
     settings: {
-
       react: { version: "detect" },
-  "import/resolver": {
-    node: {
-      extensions: [".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx"]
-    }
-  },
-  "import/extensions": [".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx"]
 
-    }
-  }
+      // treat these modules as "core" so import/no-unresolved won't flag them
+      "import/core-modules": [
+        "eslint/config",
+        "@vitejs/plugin-react",
+        "@tailwindcss/vite",
+      ],
+
+      // node resolver so .jsx files and local modules resolve correctly
+      "import/resolver": {
+        node: {
+          extensions: [".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx"],
+          moduleDirectory: ["node_modules", "src"],
+        },
+      },
+
+      "import/extensions": [".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx"],
+    },
+  },
 ]);

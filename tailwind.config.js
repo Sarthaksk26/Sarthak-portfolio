@@ -4,12 +4,12 @@ export default {
     extend: {
       colors: {
         primary: "#0f172a",
-        accent: "#06b6d4"
+        accent: "#06b6d4",
       },
       fontFamily: {
-        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"]
-      }
-    }
+        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+      },
+    },
   },
-  plugins: []
+  plugins: [],
 };
