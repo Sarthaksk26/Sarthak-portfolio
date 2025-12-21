@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 function TechTag({ name }) {
   return <span className="text-xs px-2 py-1 bg-slate-100 rounded">{name}</span>;
