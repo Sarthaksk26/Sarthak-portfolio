@@ -1,18 +1,42 @@
 [
   {
     "id": "p1",
-    "title": "Portfolio Starter",
-    "description": "Minimal React + Tailwind portfolio template with performance best practices.",
+    "title": "EESA Committee",
+    "description": "Website For Electrical Engineering Student's association of GCEK",
     "tech": ["React", "Vite", "Tailwind"],
-    "repo": "https://github.com/your/repo",
-    "live": "https://your-site.example"
+    "repo": "https://github.com/Sarthaksk26/eesa-website",
+    "live": "https://eesa-gcek.onrender.com/"
   },
   {
     "id": "p2",
-    "title": "Project Two",
-    "description": "Short description of project two and its impact.",
-    "tech": ["Node", "Express"],
-    "repo": "https://github.com/your/repo2",
-    "live": "https://project-two.example"
+    "title": "Call Manager Pro",
+    "description": "Priority-Based Customer Call Management System",
+    "tech": ["HTML", "CSS3", "Javascript", "Node.js", "Express.js", "MongoDB"],
+    "repo": "https://github.com/Sarthaksk26/call-manager-pro?tab=readme-ov-file",
+    "live": "https://call-manager-pro.vercel.app/"
+  },
+  {
+    "id": "p3",
+    "title": "Task Tick",
+    "description": "A Task Management Application",
+    "tech": ["React", "Vite", "Tailwind"],
+    "repo": "https://github.com/Sarthaksk26/taskTick",
+    "live": "https://tasktick-spq3.onrender.com"
+  },
+  {
+    "id": "p4",
+    "title": "Tic-tac-toe",
+    "description": "Want Fun?.. Lets play Tic-tac-toe",
+    "tech": ["React", "Vite", "CSS3"],
+    "repo": "https://github.com/Sarthaksk26/Tic-tac-toe",
+    "live": "https://sarthaksk26.github.io/Tic-tac-toe/"
+  },
+  {
+    "id": "p5",
+    "title": "Password Generator",
+    "description": "Want to generate strong passwords ?.. Lets Generate",
+    "tech": ["React", "Vite", "Tailwind"],
+    "repo": "https://github.com/Sarthaksk26/passwordGenerator",
+    "live": "https://sarthaksk26.github.io/passwordGenerator/"
   }
 ]
