@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Download, Mail, ChevronDown, Copy, Check } from 'lucide-react';
+import { Download, Mail, ChevronDown, Copy, Check, Github, ArrowRight } from 'lucide-react';
 
 import projects from '../data/projects.json';
 import ProjectCard from '../components/ui/ProjectCard';
 
 export default function Home() {
   const [emailCopied, setEmailCopied] = useState(false);
-  const myEmail = 'sarthakkumbhar26@gmail.com'; // Replace with your actual email
+  const myEmail = 'sarthakkumbhar26@gmail.com';
+  const githubProfile = 'https://github.com/Sarthaksk26';
 
   const copyEmail = async () => {
     try {
@@ -91,6 +92,20 @@ export default function Home() {
           {projects.map((p, index) => (
             <ProjectCard key={p.id} project={p} index={index} />
           ))}
+        </div>
+
+        {/* See More Work Button */}
+        <div className="mt-12 text-center">
+          <a
+            href={githubProfile}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-2xl text-lg font-medium hover:bg-slate-800 hover:shadow-2xl hover:scale-105 transition-all"
+          >
+            <Github size={24} className="group-hover:rotate-12 transition-transform" />
+            <span>See More Work on GitHub</span>
+            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+          </a>
         </div>
       </section>
 
