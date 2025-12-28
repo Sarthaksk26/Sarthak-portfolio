@@ -1,10 +1,30 @@
-import React from 'react';
-import { Download, Mail, ChevronDown } from 'lucide-react';
+import React, { useState } from 'react';
+import { Download, Mail, ChevronDown, Copy, Check } from 'lucide-react';
 
 import projects from '../data/projects.json';
 import ProjectCard from '../components/ui/ProjectCard';
 
 export default function Home() {
+  const [emailCopied, setEmailCopied] = useState(false);
+  const myEmail = 'sarthakkumbhar26@gmail.com'; // Replace with your actual email
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(myEmail);
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
+
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <div className="space-y-32 px-6 py-12 container">
       {/* Hero Section */}
@@ -36,13 +56,13 @@ export default function Home() {
               <Download size={20} className="group-hover:animate-bounce" />
               Download Resume
             </a>
-            <a
-              href="mailto:you@example.com"
-              className="px-6 py-3 border-2 border-slate-300 rounded-xl font-medium hover:border-amber-600 hover:bg-amber-50 transition-all flex items-center gap-2"
+            <button
+              onClick={scrollToContact}
+              className="px-6 py-3 border-2 border-slate-300 rounded-xl font-medium hover:border-amber-600 hover:bg-amber-50 transition-all flex items-center gap-2 cursor-pointer"
             >
               <Mail size={20} />
               Contact Me
-            </a>
+            </button>
           </div>
         </div>
 
@@ -108,9 +128,31 @@ export default function Home() {
             I'm always open to discussing new projects, creative ideas, or opportunities.
           </p>
 
-          <div className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-600 to-orange-500 text-white rounded-2xl text-lg font-medium hover:shadow-2xl hover:scale-105 transition-all">
-            <Mail size={24} />
-            <a href="mailto:you@example.com">sarthakkumbhar26@gmail.com</a>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href={`mailto:${myEmail}`}
+              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-600 to-orange-500 text-white rounded-2xl text-lg font-medium hover:shadow-2xl hover:scale-105 transition-all"
+            >
+              <Mail size={24} />
+              <span>{myEmail}</span>
+            </a>
+
+            <button
+              onClick={copyEmail}
+              className="inline-flex items-center gap-3 px-8 py-4 border-2 border-slate-300 rounded-2xl text-lg font-medium hover:border-amber-600 hover:bg-amber-50 transition-all hover:scale-105"
+            >
+              {emailCopied ? (
+                <>
+                  <Check size={24} className="text-green-600" />
+                  <span className="text-green-600">Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Copy size={24} />
+                  <span>Copy Email</span>
+                </>
+              )}
+            </button>
           </div>
         </div>
       </section>
