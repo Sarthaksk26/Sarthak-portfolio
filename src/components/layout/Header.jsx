@@ -27,7 +27,7 @@ export default function Header() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-white/80 backdrop-blur-lg shadow-lg border-b border-slate-200'
-          : 'bg-transparent'
+          : 'bg-white/90 backdrop-blur-sm shadow-sm'
       }`}
     >
       <div className="container px-6 py-4 flex items-center justify-between">
