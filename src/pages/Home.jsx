@@ -6,8 +6,8 @@ import ProjectCard from '../components/ui/ProjectCard';
 
 export default function Home() {
   const [emailCopied, setEmailCopied] = useState(false);
-  const myEmail = 'sarthakkumbhar26@gmail.com';
-  const githubProfile = 'https://github.com/Sarthaksk26';
+  const myEmail = 'sarthakkumbhar26@gmail.com'; // Replace with your actual email
+  const githubProfile = 'https://github.com/Sarthaksk26'; // Replace with your GitHub username
 
   const copyEmail = async () => {
     try {
@@ -27,39 +27,39 @@ export default function Home() {
   };
 
   return (
-    <div className="space-y-32 px-6 py-12 container">
+    <div className="space-y-20 sm:space-y-32 px-4 sm:px-6 py-12 container mx-auto max-w-7xl">
       {/* Hero Section */}
-      <section className="pt-20 pb-12 min-h-screen flex flex-col justify-center relative">
+      <section className="pt-20 pb-12 min-h-screen flex flex-col justify-center relative overflow-hidden">
         {/* Animated background circles */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-amber-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-orange-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-8 left-1/2 w-72 h-72 bg-yellow-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+        <div className="absolute top-20 left-10 w-48 h-48 sm:w-72 sm:h-72 bg-amber-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+        <div className="absolute top-40 right-10 w-48 h-48 sm:w-72 sm:h-72 bg-orange-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-8 left-1/2 w-48 h-48 sm:w-72 sm:h-72 bg-yellow-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
 
         <div className="max-w-4xl relative z-10" style={{ animation: 'fadeIn 1s ease-out' }}>
           <div className="inline-block mb-4 px-4 py-2 bg-amber-100 border border-amber-200 rounded-full text-amber-700 text-sm font-medium">
             👋 Welcome to my portfolio
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-slate-900 via-amber-800 to-orange-700 bg-clip-text text-transparent leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-slate-900 via-amber-800 to-orange-700 bg-clip-text text-transparent leading-tight">
             Hi, I'm Sarthak Kumbhar
           </h1>
 
-          <p className="text-xl md:text-2xl text-slate-600 mb-8 leading-relaxed max-w-3xl">
+          <p className="text-lg sm:text-xl md:text-2xl text-slate-600 mb-8 leading-relaxed max-w-3xl">
             Curiosity led me from engineering to software — now shaping my path as a
             <span className="text-amber-600 font-semibold"> developer</span>.
           </p>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-4">
             <a
               href="/resume.pdf"
-              className="group px-6 py-3 bg-gradient-to-r from-amber-600 to-orange-500 text-white rounded-xl font-medium hover:shadow-2xl hover:scale-105 transition-all flex items-center gap-2"
+              className="group px-5 sm:px-6 py-3 bg-gradient-to-r from-amber-600 to-orange-500 text-white rounded-xl font-medium hover:shadow-2xl hover:scale-105 transition-all flex items-center justify-center gap-2 w-full sm:w-auto"
             >
               <Download size={20} className="group-hover:animate-bounce" />
               Download Resume
             </a>
             <button
               onClick={scrollToContact}
-              className="px-6 py-3 border-2 border-slate-300 rounded-xl font-medium hover:border-amber-600 hover:bg-amber-50 transition-all flex items-center gap-2 cursor-pointer"
+              className="px-5 sm:px-6 py-3 border-2 border-slate-300 rounded-xl font-medium hover:border-amber-600 hover:bg-amber-50 transition-all flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto"
             >
               <Mail size={20} />
               Contact Me
@@ -73,7 +73,7 @@ export default function Home() {
             e.preventDefault();
             document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
           }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-amber-600"
+          className="hidden sm:block absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-amber-600"
         >
           <ChevronDown size={32} />
         </a>
@@ -81,26 +81,28 @@ export default function Home() {
 
       {/* Projects Section */}
       <section id="projects" className="scroll-mt-24">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-slate-900 to-amber-800 bg-clip-text text-transparent">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-slate-900 to-amber-800 bg-clip-text text-transparent">
             Selected Projects
           </h2>
-          <p className="text-slate-600 text-lg">A collection of my recent work and experiments</p>
+          <p className="text-slate-600 text-base sm:text-lg">
+            A collection of my recent work and experiments
+          </p>
         </div>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-2">
+        <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2">
           {projects.map((p, index) => (
             <ProjectCard key={p.id} project={p} index={index} />
           ))}
         </div>
 
         {/* See More Work Button */}
-        <div className="mt-12 text-center">
+        <div className="mt-8 sm:mt-12 text-center">
           <a
             href={githubProfile}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-2xl text-lg font-medium hover:bg-slate-800 hover:shadow-2xl hover:scale-105 transition-all"
+            className="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 text-white rounded-2xl text-base sm:text-lg font-medium hover:bg-slate-800 hover:shadow-2xl hover:scale-105 transition-all"
           >
             <Github size={24} className="group-hover:rotate-12 transition-transform" />
             <span>See More Work on GitHub</span>
@@ -112,14 +114,14 @@ export default function Home() {
       {/* About Section */}
       <section id="about" className="scroll-mt-24">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-slate-200 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-amber-100 to-orange-100 rounded-full -translate-y-1/2 translate-x-1/2 opacity-50"></div>
+          <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 shadow-xl border border-slate-200 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-48 h-48 sm:w-64 sm:h-64 bg-gradient-to-br from-amber-100 to-orange-100 rounded-full -translate-y-1/2 translate-x-1/2 opacity-50"></div>
 
             <div className="relative z-10">
-              <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-slate-900 to-amber-800 bg-clip-text text-transparent">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-slate-900 to-amber-800 bg-clip-text text-transparent">
                 About Me
               </h2>
-              <p className="text-slate-700 text-lg leading-relaxed">
+              <p className="text-slate-700 text-base sm:text-lg leading-relaxed">
                 From Electrical Engineering to software development, my path has always been guided
                 by curiosity. I taught myself C++ and web development, and now work as a{' '}
                 <span className="font-semibold text-amber-600">
@@ -134,36 +136,36 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="scroll-mt-24 pb-20">
+      <section id="contact" className="scroll-mt-24 pb-12 sm:pb-20">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-slate-900 to-amber-800 bg-clip-text text-transparent">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-slate-900 to-amber-800 bg-clip-text text-transparent">
             Let's Connect
           </h2>
-          <p className="text-slate-700 text-lg mb-8">
+          <p className="text-slate-700 text-base sm:text-lg mb-6 sm:mb-8 px-4">
             I'm always open to discussing new projects, creative ideas, or opportunities.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 px-4">
             <a
               href={`mailto:${myEmail}`}
-              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-600 to-orange-500 text-white rounded-2xl text-lg font-medium hover:shadow-2xl hover:scale-105 transition-all"
+              className="inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-amber-600 to-orange-500 text-white rounded-2xl text-base sm:text-lg font-medium hover:shadow-2xl hover:scale-105 transition-all"
             >
-              <Mail size={24} />
-              <span>{myEmail}</span>
+              <Mail size={20} className="sm:w-6 sm:h-6" />
+              <span className="truncate">{myEmail}</span>
             </a>
 
             <button
               onClick={copyEmail}
-              className="inline-flex items-center gap-3 px-8 py-4 border-2 border-slate-300 rounded-2xl text-lg font-medium hover:border-amber-600 hover:bg-amber-50 transition-all hover:scale-105"
+              className="inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 border-2 border-slate-300 rounded-2xl text-base sm:text-lg font-medium hover:border-amber-600 hover:bg-amber-50 transition-all hover:scale-105"
             >
               {emailCopied ? (
                 <>
-                  <Check size={24} className="text-green-600" />
+                  <Check size={20} className="sm:w-6 sm:h-6 text-green-600" />
                   <span className="text-green-600">Copied!</span>
                 </>
               ) : (
                 <>
-                  <Copy size={24} />
+                  <Copy size={20} className="sm:w-6 sm:h-6" />
                   <span>Copy Email</span>
                 </>
               )}
