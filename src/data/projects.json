@@ -17,6 +17,14 @@
   },
   {
     "id": "p3",
+    "title": "Media Search Website",
+    "description": "Search and download high quality images, videos, gifs",
+    "tech": ["React", "Vite", "Tailwind"],
+    "repo": "https://github.com/Sarthaksk26/Media-Search",
+    "live": "https://media-search-five.vercel.app/"
+  },
+  {
+    "id": "p4",
     "title": "Task Tick",
     "description": "A Task Management Application",
     "tech": ["React", "Vite", "Tailwind"],
@@ -24,7 +32,7 @@
     "live": "https://tasktick-spq3.onrender.com"
   },
   {
-    "id": "p4",
+    "id": "p5",
     "title": "Tic-tac-toe",
     "description": "Want Fun?.. Lets play Tic-tac-toe",
     "tech": ["React", "Vite", "CSS3"],
@@ -32,7 +40,7 @@
     "live": "https://sarthaksk26.github.io/Tic-tac-toe/"
   },
   {
-    "id": "p5",
+    "id": "p6",
     "title": "Password Generator",
     "description": "Want to generate strong passwords ?.. Lets Generate",
     "tech": ["React", "Vite", "Tailwind"],
