@@ -5,37 +5,38 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import importPlugin from 'eslint-plugin-import';
-import { defineConfig, globalIgnores } from 'eslint/config';
+import tseslint from 'typescript-eslint';
 
-export default defineConfig([
-  globalIgnores(['dist']),
+export default tseslint.config(
+  { ignores: ['dist'] },
   {
-    files: ['**/*.{js,jsx}'],
     extends: [
       js.configs.recommended,
+      ...tseslint.configs.recommended,
       reactHooks.configs.flat.recommended,
-      reactRefresh.configs.vite,
     ],
-    // NOTE: do NOT include reactRefresh here to avoid duplicate plugin registration
-    plugins: {
-      react,
-      'react-hooks': reactHooks,
-      'jsx-a11y': jsxA11y,
-      import: importPlugin,
-    },
+    files: ['**/*.{ts,tsx,js,jsx}'],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
       parserOptions: {
-        ecmaVersion: 'latest',
-        ecmaFeatures: { jsx: true },
-        sourceType: 'module',
+        project: ['./tsconfig.json', './tsconfig.node.json'],
+        tsconfigRootDir: import.meta.dirname,
       },
     },
+    plugins: {
+      react,
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+      'jsx-a11y': jsxA11y,
+      import: importPlugin,
+    },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       'import/order': [
         'warn',
         {
@@ -43,26 +44,29 @@ export default defineConfig([
           'newlines-between': 'always',
         },
       ],
-      'import/no-unresolved': 'error',
+      'import/no-unresolved': 'off', // TypeScript handles this
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
       'jsx-a11y/alt-text': 'warn',
     },
     settings: {
       react: { version: 'detect' },
-
-      // treat these modules as "core" so import/no-unresolved won't flag them
-      'import/core-modules': ['eslint/config', '@vitejs/plugin-react', '@tailwindcss/vite'],
-
-      // node resolver so .jsx files and local modules resolve correctly
       'import/resolver': {
         node: {
-          extensions: ['.js', '.jsx', '.mjs', '.cjs', '.ts', '.tsx'],
-          moduleDirectory: ['node_modules', 'src'],
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        },
+        typescript: {
+          alwaysTryTypes: true,
         },
       },
-
-      'import/extensions': ['.js', '.jsx', '.mjs', '.cjs', '.ts', '.tsx'],
     },
   },
-]);
+  {
+    files: ['*.js', '*.config.js'],
+    extends: [js.configs.recommended],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+    },
+  }
+);
