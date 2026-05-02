@@ -1,22 +1,18 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { Mail, ChevronDown, Copy, Check, Github, ArrowRight, ExternalLink } from 'lucide-react';
+import { Mail, ChevronDown, Copy, Check, Github, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import projectsData from '../data/projects.json';
-import experienceData from '../data/experience.json';
 import ProjectCard from '../components/ui/ProjectCard';
-import SkillBar from '../components/ui/SkillBar';
-import Timeline, { Experience } from '../components/ui/Timeline';
 import { Project } from '../types/project';
 import SEO from '../components/ui/SEO';
 import { useMagnetic } from '../hooks/useMagnetic';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import ParticleField from '../components/ui/ParticleField';
-import ExperienceSection from '../components/sections/Experience';
-import Skills from '../components/sections/Skills';
+import ExperienceSection from '@/components/sections/Experience';
+import Skills from '@/components/sections/Skills';
 
 const projects = projectsData as Project[];
-const experiences = experienceData as Experience[];
 
 const GREETING_WORDS = [
   'Frontend Engineer',
@@ -55,39 +51,7 @@ export default function Home() {
   const resumeRef = useMagnetic(0.2);
   const reveal = useScrollReveal();
 
-  const SKILLS_DATA = useMemo(
-    () => ({
-      Frontend: [
-        { name: 'React', level: 90, icon: '⚛️' },
-        { name: 'TypeScript', level: 75, icon: '📘' },
-        { name: 'Tailwind CSS', level: 88, icon: '🎨' },
-        { name: 'Vite', level: 82, icon: '⚡' },
-        { name: 'HTML/CSS', level: 95, icon: '🌐' },
-      ],
-      Backend: [
-        { name: 'Node.js', level: 70, icon: '🟢' },
-        { name: 'Express.js', level: 72, icon: '🚂' },
-        { name: 'MongoDB', level: 68, icon: '🍃' },
-      ],
-      Tools: [
-        { name: 'Git', level: 85, icon: '📜' },
-        { name: 'Linux', level: 65, icon: '🐧' },
-        { name: 'Figma', level: 60, icon: '🖌️' },
-      ],
-    }),
-    []
-  );
-
   useEffect(() => {
-    console.log(
-      '%c SK ',
-      'background: #6366F1; color: white; font-size: 24px; font-weight: bold; padding: 10px; border-radius: 8px;'
-    );
-    console.log(
-      '%cBuilt by Sarthak Kumbhar',
-      'color: #6366F1; font-weight: bold; font-family: monospace;'
-    );
-
     const interval = setInterval(() => {
       setWordIndex((prev) => (prev + 1) % GREETING_WORDS.length);
     }, 2500);
@@ -110,12 +74,8 @@ export default function Home() {
     }
   }, [myEmail]);
 
-  const scrollToProjects = useCallback(() => {
-    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-  }, []);
-
-  const clientProjects = projects.filter((p) => p.category === 'client');
-  const practiceProjects = projects.filter((p) => p.category === 'practice');
+  const clientProjects = useMemo(() => projects.filter((p) => p.category === 'client'), []);
+  const practiceProjects = useMemo(() => projects.filter((p) => p.category === 'practice'), []);
 
   return (
     <div className="space-y-20 sm:space-y-32">
@@ -179,7 +139,7 @@ export default function Home() {
               ref={viewWorkRef as React.RefObject<HTMLAnchorElement>}
               onClick={(e) => {
                 e.preventDefault();
-                scrollToProjects();
+                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
               }}
               data-cursor="link"
               aria-label="View My Work"
@@ -205,7 +165,7 @@ export default function Home() {
           href="#"
           onClick={(e) => {
             e.preventDefault();
-            scrollToProjects();
+            document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -223,17 +183,18 @@ export default function Home() {
       {/* Skills Section */}
       <Skills />
 
+      {/* Projects Section */}
       <section id="projects" className="container mx-auto px-4 max-w-7xl scroll-mt-24">
         <div ref={reveal} data-reveal className="text-center mb-24">
           <h2 className="text-4xl sm:text-6xl font-display font-bold mb-6 text-gradient">
-            Selected Projects
+            Projects
           </h2>
           <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-            A curated list of my professional work and experimental labs.
+            A selection of my professional client work and technical experiments.
           </p>
         </div>
 
-        {/* Real World Projects */}
+        {/* SUBSECTION A — Real World Projects */}
         <div className="space-y-12 mb-32">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -244,34 +205,28 @@ export default function Home() {
             <h3 className="text-3xl font-display font-bold text-slate-900 dark:text-white">
               Real World Projects
             </h3>
-            <p className="text-slate-500">Built for real clients and live users</p>
+            <p className="text-slate-500 font-medium">Shipped for real clients and live users</p>
           </motion.div>
 
           <div className="grid gap-12 grid-cols-1 lg:grid-cols-2">
             {isLoading
               ? [1, 2].map((i) => <div key={i} className="aspect-video rounded-[3rem] skeleton" />)
-              : clientProjects.map((p, index) => (
-                  <div key={p.id} className="relative group/client">
-                    <div className="absolute top-6 right-6 z-20 px-3 py-1.5 bg-green-500/10 border border-green-500/20 rounded-full text-[10px] font-bold text-green-500 uppercase tracking-wider flex items-center gap-2 backdrop-blur-md">
-                      <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                      Live & Used
-                    </div>
-                    <ProjectCard project={p} />
-                  </div>
+              : clientProjects.map((p) => (
+                  <ProjectCard key={p.id} project={p} variant="default" showLiveBadge={true} />
                 ))}
           </div>
         </div>
 
         {/* Divider */}
-        <div className="flex items-center gap-8 my-24 opacity-30">
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent to-slate-400" />
-          <span className="text-xs uppercase tracking-[0.4em] font-medium text-slate-400">
-            — side projects —
+        <div className="flex items-center gap-4 my-12">
+          <div className="flex-1 h-px bg-slate-200 dark:bg-slate-800" />
+          <span className="text-sm text-slate-400 dark:text-slate-600 font-medium tracking-wider uppercase">
+            Labs & Experiments
           </span>
-          <div className="flex-1 h-px bg-gradient-to-l from-transparent to-slate-400" />
+          <div className="flex-1 h-px bg-slate-200 dark:bg-slate-800" />
         </div>
 
-        {/* Labs & Experiments */}
+        {/* SUBSECTION B — Labs & Experiments */}
         <div className="space-y-12 mb-24">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -282,7 +237,9 @@ export default function Home() {
             <h3 className="text-3xl font-display font-bold text-slate-900 dark:text-white">
               Labs & Experiments
             </h3>
-            <p className="text-slate-500">Practice builds and fun side projects</p>
+            <p className="text-slate-500 font-medium">
+              Practice builds, experiments and fun projects
+            </p>
           </motion.div>
 
           <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
@@ -290,17 +247,13 @@ export default function Home() {
               ? [1, 2, 3].map((i) => (
                   <div key={i} className="aspect-video rounded-[2.5rem] skeleton" />
                 ))
-              : practiceProjects.map((p, index) => (
-                  <div
-                    key={p.id}
-                    className="scale-95 hover:scale-100 transition-transform duration-500"
-                  >
-                    <ProjectCard project={p} variant="compact" />
-                  </div>
+              : practiceProjects.map((p) => (
+                  <ProjectCard key={p.id} project={p} variant="compact" />
                 ))}
           </div>
         </div>
 
+        {/* GitHub CTA */}
         <div className="flex justify-center mt-20">
           <a
             href="https://github.com/Sarthaksk26"
@@ -310,12 +263,13 @@ export default function Home() {
             className="group flex items-center gap-3 px-8 py-4 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-full font-bold text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-white/10 transition-all hover:scale-105"
           >
             <Github size={20} />
-            See More Work on GitHub
+            See More on GitHub
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </a>
         </div>
       </section>
 
+      {/* About Section */}
       <section id="about" className="container mx-auto px-4 max-w-4xl scroll-mt-24">
         <div
           ref={reveal}
@@ -337,17 +291,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="journey" className="container mx-auto px-4 max-w-7xl scroll-mt-24">
-        <div ref={reveal} data-reveal className="text-center mb-24">
-          <h2 className="text-4xl sm:text-6xl font-display font-bold mb-6 text-gradient">
-            My Journey
-          </h2>
-          <p className="text-slate-500 text-lg">A timeline of my professional growth</p>
-        </div>
-
-        <Timeline data={experiences} />
-      </section>
-
+      {/* Contact Section */}
       <section id="contact" className="container mx-auto px-4 max-w-4xl pb-32 text-center">
         <div ref={reveal} data-reveal className="space-y-12">
           <div>

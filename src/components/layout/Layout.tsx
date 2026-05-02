@@ -6,7 +6,7 @@ import { Github, Linkedin, Mail } from 'lucide-react';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen text-slate-900 dark:text-slate-100 antialiased selection:bg-accent/30 selection:text-accent">
+    <div className="min-h-screen theme-transition text-slate-900 dark:text-slate-100 antialiased selection:bg-accent/30 selection:text-accent">
       <a
         href="#main"
         className="sr-only focus:not-sr-only fixed top-4 left-4 z-[1000] bg-accent text-white px-4 py-2 rounded-lg font-bold"

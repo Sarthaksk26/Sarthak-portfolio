@@ -23,6 +23,11 @@ const SEO: React.FC<SEOProps> = ({ title, description, keywords }) => {
       const metaKeywords = document.querySelector('meta[name="keywords"]');
       if (metaKeywords) {
         metaKeywords.setAttribute('content', keywords);
+      } else {
+        const tag = document.createElement('meta');
+        tag.name = 'keywords';
+        tag.content = keywords;
+        document.head.appendChild(tag);
       }
     }
   }, [title, description, keywords]);

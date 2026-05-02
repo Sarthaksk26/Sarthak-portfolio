@@ -1,3 +1,6 @@
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
 import js from '@eslint/js';
 import globals from 'globals';
 import react from 'eslint-plugin-react';
@@ -6,6 +9,8 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import importPlugin from 'eslint-plugin-import';
 import tseslint from 'typescript-eslint';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default tseslint.config(
   { ignores: ['dist'] },
@@ -21,7 +26,7 @@ export default tseslint.config(
       globals: globals.browser,
       parserOptions: {
         project: ['./tsconfig.json', './tsconfig.node.json'],
-        tsconfigRootDir: import.meta.dirname,
+        tsconfigRootDir: __dirname,
       },
     },
     plugins: {
