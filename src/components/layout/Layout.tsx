@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header';
 import ScrollProgress from '../ui/ScrollProgress';
 import ScrollToTop from '../ui/ScrollToTop';
+import Logo from '../ui/Logo';
 import { Github, Linkedin, Mail } from 'lucide-react';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -24,11 +25,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <footer className="py-20 border-t border-slate-200 dark:border-white/5 relative overflow-hidden bg-slate-50 dark:bg-[#0F0F0F]">
         <div className="container mx-auto px-6 max-w-7xl relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="text-center md:text-left">
-              <h2 className="text-2xl font-display font-bold text-slate-900 dark:text-white mb-2">
-                Sarthak Kumbhar
-              </h2>
-              <p className="text-slate-500 text-sm">Frontend Engineer & UI Specialist</p>
+            <div className="text-center md:text-left flex flex-col items-center md:items-start gap-4">
+              <Logo className="h-12 w-auto" />
+              <div>
+                <h2 className="text-xl font-display font-bold text-slate-900 dark:text-white">
+                  Sarthak Kumbhar
+                </h2>
+                <p className="text-slate-500 text-sm">Frontend Engineer & UI Specialist</p>
+              </div>
             </div>
 
             <div className="flex gap-6">

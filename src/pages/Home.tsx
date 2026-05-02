@@ -150,7 +150,7 @@ export default function Home() {
             </a>
             <a
               ref={resumeRef as React.RefObject<HTMLAnchorElement>}
-              href="/resume.pdf"
+              href="/Sarthak_Kumbhar_Frontend_dev.pdf"
               data-cursor="link"
               aria-label="Download Resume"
               className="px-8 py-4 border border-slate-200 dark:border-slate-800 rounded-full font-bold text-slate-800 dark:text-slate-200 shine-sweep stagger-item bounce-hover"

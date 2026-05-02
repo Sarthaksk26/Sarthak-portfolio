@@ -3,6 +3,7 @@ import { Menu, X, Sun, Moon, ArrowRight, Github, Linkedin, Mail } from 'lucide-r
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../hooks/useTheme';
 import { useActiveSection } from '../../hooks/useActiveSection';
+import Logo from '../ui/Logo';
 
 const NAV_LINKS = [
   { name: 'Home', href: 'hero' },
@@ -62,14 +63,12 @@ export default function Header() {
         <div className="container mx-auto px-6 flex items-center justify-between max-w-[1200px]">
           {/* Logo Monogram */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
             className="group cursor-pointer"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-accent to-secondary rounded-xl flex items-center justify-center font-display font-bold text-white shadow-lg group-hover:rotate-12 transition-transform">
-              SK
-            </div>
+            <Logo className="h-10 sm:h-12 w-auto transition-transform group-hover:scale-105" />
           </motion.div>
 
           {/* Desktop Nav */}
