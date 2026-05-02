@@ -2,30 +2,85 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
-     <link rel="icon" href="./logo.jpg">
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sarthak Kumbhar | Software Engineer Portfolio</title>
-    <meta name="description" content="Portfolio of Sarthak Kumbhar, a Software Engineer at Hexaware Technologies. Exploring the intersection of engineering and software." />
-    <meta name="keywords" content="Sarthak Kumbhar, Software Engineer, Hexaware Technologies, React Developer, Portfolio, Engineering" />
-    
-    <!-- Open Graph / Facebook -->
+    <script>
+      (function () {
+        try {
+          const theme =
+            localStorage.getItem('theme') ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.classList.add(theme);
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- SEO Meta Tags -->
+    <title>Sarthak Kumbhar — Frontend Engineer | React Developer</title>
+    <meta
+      name="description"
+      content="Software engineer specializing in React, building fast and beautiful web experiences. Currently at Hexaware Technologies."
+    />
+    <meta
+      name="keywords"
+      content="React, Frontend Engineer, Web Developer, Portfolio, Sarthak Kumbhar, UI Engineering"
+    />
+    <link rel="canonical" href="https://sarthak-portfolio.vercel.app/" />
+    <meta name="theme-color" content="#6366F1" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+
+    <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://sarthak-portfolio.vercel.app/" />
-    <meta property="og:title" content="Sarthak Kumbhar | Software Engineer Portfolio" />
-    <meta property="og:description" content="Software Engineer at Hexaware Technologies. Exploring the intersection of engineering and software." />
-    <meta property="og:image" content="/og-image.jpg" />
+    <meta property="og:title" content="Sarthak Kumbhar — Frontend Engineer | React Developer" />
+    <meta
+      property="og:description"
+      content="Software engineer specializing in React, building fast and beautiful web experiences. Currently at Hexaware Technologies."
+    />
+    <meta property="og:image" content="https://sarthak-portfolio.vercel.app/og-image.jpg" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://sarthak-portfolio.vercel.app/" />
-    <meta property="twitter:title" content="Sarthak Kumbhar | Software Engineer Portfolio" />
-    <meta property="twitter:description" content="Software Engineer at Hexaware Technologies. Exploring the intersection of engineering and software." />
-    <meta property="twitter:image" content="/og-image.jpg" />
+    <meta
+      property="twitter:title"
+      content="Sarthak Kumbhar — Frontend Engineer | React Developer"
+    />
+    <meta
+      property="twitter:description"
+      content="Software engineer specializing in React, building fast and beautiful web experiences. Currently at Hexaware Technologies."
+    />
+    <meta property="twitter:image" content="https://sarthak-portfolio.vercel.app/og-image.jpg" />
 
+    <!-- Preconnect & Preload -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      as="style"
+    />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Sarthak Kumbhar",
+        "url": "https://sarthak-portfolio.vercel.app/",
+        "jobTitle": "Frontend Engineer",
+        "sameAs": [
+          "https://github.com/Sarthaksk26",
+          "https://www.linkedin.com/in/sarthak-kumbhar/"
+        ],
+        "description": "Software engineer specializing in React, building fast and beautiful web experiences."
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

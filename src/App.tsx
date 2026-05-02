@@ -1,24 +1,30 @@
 import React, { Suspense, lazy } from 'react';
-
 import Layout from './components/layout/Layout';
+import CustomCursor from './components/ui/CustomCursor';
+import ErrorBoundary from './components/ui/ErrorBoundary';
 
 const Home = lazy(() => import('./pages/Home'));
 
 export default function App() {
   return (
-    <Layout>
-      <Suspense
-        fallback={
-          <div className="min-h-screen flex items-center justify-center">
-            <div className="text-center">
-              <div className="w-16 h-16 border-4 border-amber-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-              <p className="text-slate-600">Loading...</p>
+    <ErrorBoundary>
+      <CustomCursor />
+      <Layout>
+        <Suspense
+          fallback={
+            <div className="min-h-screen flex items-center justify-center bg-[#0F0F0F]">
+              <div className="space-y-4 text-center">
+                <div className="w-12 h-12 border-2 border-accent border-t-transparent rounded-full animate-spin mx-auto" />
+                <p className="text-slate-500 font-mono text-xs uppercase tracking-widest">
+                  Initialising Stack...
+                </p>
+              </div>
             </div>
-          </div>
-        }
-      >
-        <Home />
-      </Suspense>
-    </Layout>
+          }
+        >
+          <Home />
+        </Suspense>
+      </Layout>
+    </ErrorBoundary>
   );
 }

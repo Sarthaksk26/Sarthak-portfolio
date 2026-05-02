@@ -1,40 +1,106 @@
-import React, { useState } from 'react';
-import { Download, Mail, ChevronDown, Copy, Check, Github, ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { Mail, ChevronDown, Copy, Check, Github, ArrowRight, ExternalLink } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import projectsData from '../data/projects.json';
+import experienceData from '../data/experience.json';
 import ProjectCard from '../components/ui/ProjectCard';
+import SkillBar from '../components/ui/SkillBar';
+import Timeline, { Experience } from '../components/ui/Timeline';
 import { Project } from '../types/project';
 import SEO from '../components/ui/SEO';
+import { useMagnetic } from '../hooks/useMagnetic';
+import { useScrollReveal } from '../hooks/useScrollReveal';
+import ParticleField from '../components/ui/ParticleField';
+import ExperienceSection from '../components/sections/Experience';
+import Skills from '../components/sections/Skills';
 
 const projects = projectsData as Project[];
+const experiences = experienceData as Experience[];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.3
-    }
-  }
-};
+const GREETING_WORDS = [
+  'Frontend Engineer',
+  'React Developer',
+  'UI Craftsman',
+  'Open Source Builder',
+];
 
-const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: { duration: 0.5, ease: 'easeOut' }
-  }
-};
+const FloatingBadge = React.memo(
+  ({
+    children,
+    className,
+    delay = 0,
+  }: {
+    children: React.ReactNode;
+    className: string;
+    delay?: number;
+  }) => (
+    <div
+      className={`absolute z-20 glass px-4 py-2 rounded-2xl text-xs font-bold text-accent shadow-xl animate-float-slow ${className}`}
+      style={{ animationDelay: `${delay}s` }}
+    >
+      {children}
+    </div>
+  )
+);
 
 export default function Home() {
   const [emailCopied, setEmailCopied] = useState(false);
-  const myEmail = 'sarthakkumbhar26@gmail.com';
-  const githubProfile = 'https://github.com/Sarthaksk26';
+  const [wordIndex, setWordIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const copyEmail = async () => {
+  const myEmail = 'sarthakkumbhar26@gmail.com';
+
+  const viewWorkRef = useMagnetic(0.2);
+  const resumeRef = useMagnetic(0.2);
+  const reveal = useScrollReveal();
+
+  const SKILLS_DATA = useMemo(
+    () => ({
+      Frontend: [
+        { name: 'React', level: 90, icon: '⚛️' },
+        { name: 'TypeScript', level: 75, icon: '📘' },
+        { name: 'Tailwind CSS', level: 88, icon: '🎨' },
+        { name: 'Vite', level: 82, icon: '⚡' },
+        { name: 'HTML/CSS', level: 95, icon: '🌐' },
+      ],
+      Backend: [
+        { name: 'Node.js', level: 70, icon: '🟢' },
+        { name: 'Express.js', level: 72, icon: '🚂' },
+        { name: 'MongoDB', level: 68, icon: '🍃' },
+      ],
+      Tools: [
+        { name: 'Git', level: 85, icon: '📜' },
+        { name: 'Linux', level: 65, icon: '🐧' },
+        { name: 'Figma', level: 60, icon: '🖌️' },
+      ],
+    }),
+    []
+  );
+
+  useEffect(() => {
+    console.log(
+      '%c SK ',
+      'background: #6366F1; color: white; font-size: 24px; font-weight: bold; padding: 10px; border-radius: 8px;'
+    );
+    console.log(
+      '%cBuilt by Sarthak Kumbhar',
+      'color: #6366F1; font-weight: bold; font-family: monospace;'
+    );
+
+    const interval = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % GREETING_WORDS.length);
+    }, 2500);
+
+    const timer = setTimeout(() => setIsLoading(false), 800);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timer);
+    };
+  }, []);
+
+  const copyEmail = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(myEmail);
       setEmailCopied(true);
@@ -42,211 +108,279 @@ export default function Home() {
     } catch (err) {
       console.error('Failed to copy:', err);
     }
-  };
+  }, [myEmail]);
 
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
+  const scrollToProjects = useCallback(() => {
+    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
+
+  const clientProjects = projects.filter((p) => p.category === 'client');
+  const practiceProjects = projects.filter((p) => p.category === 'practice');
 
   return (
-    <div className="space-y-20 sm:space-y-32 px-4 sm:px-6 py-12 container mx-auto max-w-7xl">
-      <SEO 
-        title="Home" 
-        description="Software Engineer at Hexaware Technologies. Exploring the intersection of engineering and software." 
+    <div className="space-y-20 sm:space-y-32">
+      <SEO
+        title="Home"
+        description="Software Engineer at Hexaware Technologies. Expert in React and modern UI engineering."
       />
 
-      {/* Hero Section */}
-      <section className="pt-20 pb-12 min-h-[90vh] flex flex-col justify-center relative overflow-hidden">
-        {/* Animated background circles */}
-        <div className="absolute top-20 left-10 w-48 h-48 sm:w-72 sm:h-72 bg-amber-200 dark:bg-amber-900/20 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-        <div className="absolute top-40 right-10 w-48 h-48 sm:w-72 sm:h-72 bg-orange-200 dark:bg-orange-900/20 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-8 left-1/2 w-48 h-48 sm:w-72 sm:h-72 bg-yellow-200 dark:bg-yellow-900/20 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+      <section
+        id="hero"
+        className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden"
+      >
+        <div className="noise-overlay" />
+        <ParticleField />
 
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="max-w-4xl relative z-10"
-        >
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="inline-block mb-4 px-4 py-2 bg-amber-100 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-full text-amber-700 dark:text-amber-400 text-sm font-medium"
-          >
-            👋 Welcome to my portfolio
-          </motion.div>
+        <FloatingBadge className="top-1/4 right-[10%] sm:right-[15%]" delay={0}>
+          React 19
+        </FloatingBadge>
+        <FloatingBadge className="top-1/2 left-[5%] sm:left-[10%]" delay={2}>
+          TypeScript
+        </FloatingBadge>
+        <FloatingBadge className="bottom-1/4 right-[5%] sm:right-[10%]" delay={4}>
+          Open Source
+        </FloatingBadge>
 
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-slate-900 via-amber-800 to-orange-700 dark:from-white dark:via-amber-400 dark:to-orange-500 bg-clip-text text-transparent leading-tight">
-            Hi, I'm Sarthak Kumbhar
+        <div className="max-w-5xl relative z-10 space-y-8">
+          <div className="h-8 overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={GREETING_WORDS[wordIndex]}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -20, opacity: 0 }}
+                className="text-accent font-display font-bold tracking-widest uppercase text-sm"
+              >
+                {GREETING_WORDS[wordIndex]}
+              </motion.p>
+            </AnimatePresence>
+          </div>
+
+          <h1 className="font-display font-bold leading-tight">
+            {['Hi,', "I'm", 'Sarthak', 'Kumbhar'].map((word, i) => (
+              <span
+                key={i}
+                className="inline-block stagger-item text-[clamp(2.5rem,8vw,4.5rem)] mr-[0.3em] bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent"
+                style={{ animationDelay: `${i * 80}ms` }}
+              >
+                {word}
+              </span>
+            ))}
           </h1>
 
-          <p className="text-lg sm:text-xl md:text-2xl text-slate-600 dark:text-slate-400 mb-8 leading-relaxed max-w-3xl">
-            Curiosity led me from engineering to software — now shaping my path as a
-            <span className="text-amber-600 dark:text-amber-400 font-semibold"> developer</span>.
+          <p className="text-xl sm:text-2xl text-slate-500 dark:text-slate-400 font-light tracking-wide max-w-2xl mx-auto">
+            I build fast, beautiful web experiences
+            <span className="inline-block w-[2px] h-[1em] bg-accent ml-1 translate-y-1 cursor-blink" />
           </p>
 
-          <div className="flex flex-col sm:flex-row flex-wrap gap-4">
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4">
+            <a
+              href="#"
+              ref={viewWorkRef as React.RefObject<HTMLAnchorElement>}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToProjects();
+              }}
+              data-cursor="link"
+              aria-label="View My Work"
+              className="px-8 py-4 bg-gradient-to-r from-accent to-indigo-700 text-white rounded-full font-bold shadow-xl hover:shadow-accent/40 transition-all stagger-item bounce-hover"
+              style={{ animationDelay: '400ms' }}
+            >
+              View My Work
+            </a>
+            <a
+              ref={resumeRef as React.RefObject<HTMLAnchorElement>}
               href="/resume.pdf"
-              className="group px-5 sm:px-6 py-3 bg-gradient-to-r from-amber-600 to-orange-500 text-white rounded-xl font-medium hover:shadow-2xl transition-all flex items-center justify-center gap-2 w-full sm:w-auto"
+              data-cursor="link"
+              aria-label="Download Resume"
+              className="px-8 py-4 border border-slate-200 dark:border-slate-800 rounded-full font-bold text-slate-800 dark:text-slate-200 shine-sweep stagger-item bounce-hover"
+              style={{ animationDelay: '500ms' }}
             >
-              <Download size={20} className="group-hover:animate-bounce" />
               Download Resume
-            </motion.a>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={scrollToContact}
-              className="px-5 sm:px-6 py-3 border-2 border-slate-300 dark:border-slate-700 rounded-xl font-medium hover:border-amber-600 dark:hover:border-amber-500 hover:bg-amber-50 dark:hover:bg-amber-950/30 transition-all flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto dark:text-slate-300"
-            >
-              <Mail size={20} />
-              Contact Me
-            </motion.button>
+            </a>
           </div>
-        </motion.div>
+        </div>
 
         <motion.a
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          href="#projects"
+          href="#"
           onClick={(e) => {
             e.preventDefault();
-            document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+            scrollToProjects();
           }}
-          className="hidden sm:block absolute bottom-8 left-1/2 -translate-x-1/2 text-amber-600 dark:text-amber-400"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-400 hover:text-accent transition-colors cursor-pointer"
         >
-          <ChevronDown size={32} />
+          <span className="text-[10px] uppercase tracking-[0.3em] font-bold">Explore</span>
+          <ChevronDown className="animate-bounce" size={24} />
         </motion.a>
       </section>
 
-      {/* Projects Section */}
-      <motion.section 
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={containerVariants}
-        id="projects" 
-        className="scroll-mt-24"
-      >
-        <div className="text-center mb-8 sm:mb-12">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-slate-900 to-amber-800 dark:from-white dark:to-amber-500 bg-clip-text text-transparent">
+      {/* Experience Section */}
+      <ExperienceSection />
+
+      {/* Skills Section */}
+      <Skills />
+
+      <section id="projects" className="container mx-auto px-4 max-w-7xl scroll-mt-24">
+        <div ref={reveal} data-reveal className="text-center mb-24">
+          <h2 className="text-4xl sm:text-6xl font-display font-bold mb-6 text-gradient">
             Selected Projects
           </h2>
-          <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg">
-            A collection of my recent work and experiments
+          <p className="text-slate-500 text-lg max-w-2xl mx-auto">
+            A curated list of my professional work and experimental labs.
           </p>
         </div>
 
-        <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2">
-          {projects.map((p, index) => (
-            <motion.div key={p.id} variants={itemVariants}>
-              <ProjectCard project={p} index={index} />
-            </motion.div>
-          ))}
+        {/* Real World Projects */}
+        <div className="space-y-12 mb-32">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col items-start gap-2"
+          >
+            <h3 className="text-3xl font-display font-bold text-slate-900 dark:text-white">
+              Real World Projects
+            </h3>
+            <p className="text-slate-500">Built for real clients and live users</p>
+          </motion.div>
+
+          <div className="grid gap-12 grid-cols-1 lg:grid-cols-2">
+            {isLoading
+              ? [1, 2].map((i) => <div key={i} className="aspect-video rounded-[3rem] skeleton" />)
+              : clientProjects.map((p, index) => (
+                  <div key={p.id} className="relative group/client">
+                    <div className="absolute top-6 right-6 z-20 px-3 py-1.5 bg-green-500/10 border border-green-500/20 rounded-full text-[10px] font-bold text-green-500 uppercase tracking-wider flex items-center gap-2 backdrop-blur-md">
+                      <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                      Live & Used
+                    </div>
+                    <ProjectCard project={p} />
+                  </div>
+                ))}
+          </div>
         </div>
 
-        <motion.div 
-          variants={itemVariants}
-          className="mt-8 sm:mt-12 text-center"
-        >
+        {/* Divider */}
+        <div className="flex items-center gap-8 my-24 opacity-30">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent to-slate-400" />
+          <span className="text-xs uppercase tracking-[0.4em] font-medium text-slate-400">
+            — side projects —
+          </span>
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent to-slate-400" />
+        </div>
+
+        {/* Labs & Experiments */}
+        <div className="space-y-12 mb-24">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col items-start gap-2"
+          >
+            <h3 className="text-3xl font-display font-bold text-slate-900 dark:text-white">
+              Labs & Experiments
+            </h3>
+            <p className="text-slate-500">Practice builds and fun side projects</p>
+          </motion.div>
+
+          <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            {isLoading
+              ? [1, 2, 3].map((i) => (
+                  <div key={i} className="aspect-video rounded-[2.5rem] skeleton" />
+                ))
+              : practiceProjects.map((p, index) => (
+                  <div
+                    key={p.id}
+                    className="scale-95 hover:scale-100 transition-transform duration-500"
+                  >
+                    <ProjectCard project={p} variant="compact" />
+                  </div>
+                ))}
+          </div>
+        </div>
+
+        <div className="flex justify-center mt-20">
           <a
-            href={githubProfile}
+            href="https://github.com/Sarthaksk26"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 dark:bg-slate-800 text-white rounded-2xl text-base sm:text-lg font-medium hover:bg-slate-800 dark:hover:bg-slate-700 hover:shadow-2xl hover:scale-105 transition-all"
+            data-cursor="link"
+            className="group flex items-center gap-3 px-8 py-4 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-full font-bold text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-white/10 transition-all hover:scale-105"
           >
-            <Github size={24} className="group-hover:rotate-12 transition-transform" />
-            <span>See More Work on GitHub</span>
-            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            <Github size={20} />
+            See More Work on GitHub
+            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </a>
-        </motion.div>
-      </motion.section>
+        </div>
+      </section>
 
-      {/* About Section */}
-      <motion.section 
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        id="about" 
-        className="scroll-mt-24"
-      >
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white dark:bg-slate-900/50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 shadow-xl border border-slate-200 dark:border-slate-800 relative overflow-hidden backdrop-blur-sm">
-            <div className="absolute top-0 right-0 w-48 h-48 sm:w-64 sm:h-64 bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/10 dark:to-orange-900/10 rounded-full -translate-y-1/2 translate-x-1/2 opacity-50"></div>
-
-            <div className="relative z-10">
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-slate-900 to-amber-800 dark:from-white dark:to-amber-500 bg-clip-text text-transparent">
-                About Me
-              </h2>
-              <p className="text-slate-700 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-                From Electrical Engineering to software development, my path has always been guided
-                by curiosity. I taught myself C++ and web development, and now work as a{' '}
-                <span className="font-semibold text-amber-600 dark:text-amber-400">
-                  Software Engineer Level 1 at Hexaware Technologies
-                </span>
-                . Each step has been about growth — learning new skills, applying them to real-world
-                challenges, and preparing for the next stage of my journey as a developer.
-              </p>
-            </div>
+      <section id="about" className="container mx-auto px-4 max-w-4xl scroll-mt-24">
+        <div
+          ref={reveal}
+          data-reveal="scale"
+          className="glass p-8 sm:p-16 rounded-[3rem] relative overflow-hidden"
+        >
+          <div className="relative z-10">
+            <h2 className="text-4xl font-display font-bold mb-8 text-gradient">About Me</h2>
+            <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+              From Electrical Engineering to software development, my path has always been guided by
+              curiosity. I taught myself C++ and web development, and now work as a{' '}
+              <span className="font-bold text-accent">
+                Software Engineer at Hexaware Technologies
+              </span>
+              . Each step has been about growth — learning new skills, applying them to real-world
+              challenges, and preparing for the next stage of my journey as a developer.
+            </p>
           </div>
         </div>
-      </motion.section>
+      </section>
 
-      {/* Contact Section */}
-      <motion.section 
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        id="contact" 
-        className="scroll-mt-24 pb-12 sm:pb-20"
-      >
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-slate-900 to-amber-800 dark:from-white dark:to-amber-500 bg-clip-text text-transparent">
-            Let's Connect
+      <section id="journey" className="container mx-auto px-4 max-w-7xl scroll-mt-24">
+        <div ref={reveal} data-reveal className="text-center mb-24">
+          <h2 className="text-4xl sm:text-6xl font-display font-bold mb-6 text-gradient">
+            My Journey
           </h2>
-          <p className="text-slate-700 dark:text-slate-400 text-base sm:text-lg mb-6 sm:mb-8 px-4">
-            I'm always open to discussing new projects, creative ideas, or opportunities.
-          </p>
+          <p className="text-slate-500 text-lg">A timeline of my professional growth</p>
+        </div>
 
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 px-4">
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+        <Timeline data={experiences} />
+      </section>
+
+      <section id="contact" className="container mx-auto px-4 max-w-4xl pb-32 text-center">
+        <div ref={reveal} data-reveal className="space-y-12">
+          <div>
+            <h2 className="text-5xl font-display font-bold mb-8 text-gradient">Let's Connect</h2>
+            <p className="text-slate-500 text-lg">
+              I'm always open to discussing new projects, creative ideas, or opportunities.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <a
               href={`mailto:${myEmail}`}
-              className="inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-amber-600 to-orange-500 text-white rounded-2xl text-base sm:text-lg font-medium hover:shadow-2xl transition-all"
+              data-cursor="link"
+              aria-label="Send Email"
+              className="flex items-center gap-3 px-8 py-4 bg-accent text-white rounded-full font-bold shadow-xl transition-all hover:scale-105"
             >
-              <Mail size={20} className="sm:w-6 sm:h-6" />
-              <span className="truncate">{myEmail}</span>
-            </motion.a>
+              <Mail size={24} />
+              <span className="sr-only">Email: </span>
+              <span>{myEmail}</span>
+            </a>
 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <button
               onClick={copyEmail}
-              className="inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 border-2 border-slate-300 dark:border-slate-700 rounded-2xl text-base sm:text-lg font-medium hover:border-amber-600 dark:hover:border-amber-500 hover:bg-amber-50 dark:hover:bg-amber-950/30 transition-all dark:text-slate-300"
+              data-cursor="link"
+              aria-label="Copy Email Address"
+              className="flex items-center gap-3 px-8 py-4 glass rounded-full font-bold text-slate-900 dark:text-white transition-all hover:scale-105 hover:bg-accent/10"
             >
-              {emailCopied ? (
-                <>
-                  <Check size={20} className="sm:w-6 sm:h-6 text-green-600 dark:text-green-400" />
-                  <span className="text-green-600 dark:text-green-400">Copied!</span>
-                </>
-              ) : (
-                <>
-                  <Copy size={20} className="sm:w-6 sm:h-6" />
-                  <span>Copy Email</span>
-                </>
-              )}
-            </motion.button>
+              {emailCopied ? <Check className="text-green-500" /> : <Copy />}
+              <span>{emailCopied ? 'Copied!' : 'Copy Email'}</span>
+            </button>
           </div>
         </div>
-      </motion.section>
+      </section>
     </div>
   );
 }

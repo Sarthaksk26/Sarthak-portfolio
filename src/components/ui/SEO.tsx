@@ -11,7 +11,7 @@ const SEO: React.FC<SEOProps> = ({ title, description, keywords }) => {
     if (title) {
       document.title = `${title} | Sarthak Kumbhar`;
     }
-    
+
     if (description) {
       const metaDescription = document.querySelector('meta[name="description"]');
       if (metaDescription) {

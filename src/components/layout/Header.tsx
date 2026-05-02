@@ -1,38 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon } from 'lucide-react';
-
+import { Menu, X, Sun, Moon, ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../hooks/useTheme';
+import { useActiveSection } from '../../hooks/useActiveSection';
+
+const NAV_LINKS = [
+  { name: 'Home', href: 'hero' },
+  { name: 'Projects', href: 'projects' },
+  { name: 'Skills', href: 'skills' },
+  { name: 'Journey', href: 'journey' },
+  { name: 'About', href: 'about' },
+  { name: 'Contact', href: 'contact' },
+];
+
+const SOCIAL_LINKS = [
+  { icon: Github, href: 'https://github.com/Sarthaksk26', label: 'GitHub' },
+  { icon: Linkedin, href: '#', label: 'LinkedIn' },
+  { icon: Mail, href: 'mailto:sarthakkumbhar26@gmail.com', label: 'Email' },
+];
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const activeSection = useActiveSection(NAV_LINKS.map((link) => link.href));
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    // Prevent body scroll when mobile menu is open
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isMobileMenuOpen]);
-
-  const scrollToSection = (e: React.MouseEvent, id: string) => {
-    e.preventDefault();
+  const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      element.scrollIntoView({ behavior: 'smooth' });
       setIsMobileMenuOpen(false);
     }
   };
@@ -40,127 +42,148 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-[800] transition-all duration-500 ${
           isScrolled
-            ? 'bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg shadow-lg border-b border-slate-200 dark:border-slate-800'
-            : 'bg-white/50 dark:bg-slate-900/50 backdrop-blur-md'
+            ? 'py-3 bg-white/90 dark:bg-[#0F0F0F]/90 backdrop-blur-xl border-b border-slate-200 dark:border-white/10 shadow-sm'
+            : 'py-6 bg-transparent'
         }`}
       >
-        <div className="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between max-w-7xl">
-          <a
-            href="/"
-            className="text-lg sm:text-xl font-bold bg-gradient-to-r from-amber-600 to-orange-500 bg-clip-text text-transparent hover:scale-105 transition-transform"
+        <div className="container mx-auto px-6 flex items-center justify-between max-w-[1200px]">
+          {/* Logo Monogram */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="group cursor-pointer"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            Sarthak
-          </a>
+            <div className="w-10 h-10 bg-gradient-to-br from-accent to-secondary rounded-xl flex items-center justify-center font-display font-bold text-white shadow-lg group-hover:rotate-12 transition-transform">
+              SK
+            </div>
+          </motion.div>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center space-x-6 lg:space-x-8 text-sm font-medium">
-            <a
-              href="#projects"
-              onClick={(e) => scrollToSection(e, 'projects')}
-              className="text-slate-600 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-500 transition-colors relative group"
-            >
-              Projects
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-600 transition-all group-hover:w-full"></span>
-            </a>
-            <a
-              href="#about"
-              onClick={(e) => scrollToSection(e, 'about')}
-              className="text-slate-600 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-500 transition-colors relative group"
-            >
-              About
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-600 transition-all group-hover:w-full"></span>
-            </a>
-            <a
-              href="#contact"
-              onClick={(e) => scrollToSection(e, 'contact')}
-              className="text-slate-600 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-500 transition-colors relative group"
-            >
-              Contact
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-600 transition-all group-hover:w-full"></span>
-            </a>
-            
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-              aria-label="Toggle theme"
-            >
-              {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-            </button>
+          <nav className="hidden lg:flex items-center gap-8">
+            <ul className="flex items-center gap-8 text-sm font-bold uppercase tracking-widest">
+              {NAV_LINKS.map((link, i) => (
+                <motion.li
+                  key={link.href}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  className="relative group"
+                >
+                  <button
+                    onClick={() => scrollToSection(link.href)}
+                    className={`transition-colors duration-300 ${
+                      activeSection === link.href
+                        ? 'text-accent'
+                        : 'text-slate-500 dark:text-slate-400 dark:hover:text-white hover:text-slate-900'
+                    }`}
+                  >
+                    {link.name}
+                  </button>
+                  {/* Sliding Underline */}
+                  {activeSection === link.href && (
+                    <motion.div
+                      layoutId="activeUnderline"
+                      className="absolute -bottom-2 left-0 right-0 h-0.5 bg-accent rounded-full"
+                    />
+                  )}
+                </motion.li>
+              ))}
+            </ul>
 
-            <a
-              href="/resume.pdf"
-              className="ml-4 px-4 py-2 rounded-lg bg-gradient-to-r from-amber-600 to-orange-500 text-white hover:shadow-lg hover:scale-105 transition-all text-sm"
-            >
-              Resume
-            </a>
+            <div className="flex items-center gap-4 border-l border-slate-200 dark:border-white/10 pl-8">
+              {/* Theme Toggle */}
+              <button
+                onClick={toggleTheme}
+                className="w-10 h-10 rounded-full border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-white/30 transition-all group"
+              >
+                <motion.div
+                  key={theme}
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  transition={{ type: 'spring', stiffness: 200 }}
+                >
+                  {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+                </motion.div>
+              </button>
+
+              {/* Hire Me CTA */}
+              <button
+                onClick={() => scrollToSection('contact')}
+                className="group px-6 py-2.5 bg-gradient-to-r from-accent to-indigo-700 text-white rounded-full text-sm font-bold shadow-lg shadow-accent/20 flex items-center gap-2 hover:shadow-accent/40 transition-all border border-accent/50"
+              >
+                Hire Me
+                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
           </nav>
 
-          {/* Mobile Actions */}
-          <div className="flex items-center gap-2 md:hidden">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
-              aria-label="Toggle theme"
-            >
-              {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-            </button>
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors z-50 relative"
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="lg:hidden w-10 h-10 flex items-center justify-center text-slate-900 dark:text-white"
+          >
+            <Menu size={28} />
+          </button>
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
+      {/* Full-screen Mobile Nav */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[999] bg-white/95 dark:bg-[#0F0F0F]/95 backdrop-blur-2xl flex flex-col items-center justify-center p-12"
+          >
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="absolute top-8 right-8 w-12 h-12 flex items-center justify-center text-slate-900 dark:text-white bg-slate-100 dark:bg-white/5 rounded-full"
+            >
+              <X size={32} />
+            </button>
 
-      {/* Mobile Menu Sidebar */}
-      <div
-        className={`fixed top-0 right-0 h-full w-64 bg-white dark:bg-slate-900 shadow-2xl z-40 md:hidden transform transition-transform duration-300 ease-in-out ${
-          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
-      >
-        <nav className="flex flex-col p-6 pt-24 space-y-6">
-          <a
-            href="#projects"
-            onClick={(e) => scrollToSection(e, 'projects')}
-            className="text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-500 transition-colors py-2 text-lg font-medium"
-          >
-            Projects
-          </a>
-          <a
-            href="#about"
-            onClick={(e) => scrollToSection(e, 'about')}
-            className="text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-500 transition-colors py-2 text-lg font-medium"
-          >
-            About
-          </a>
-          <a
-            href="#contact"
-            onClick={(e) => scrollToSection(e, 'contact')}
-            className="text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-500 transition-colors py-2 text-lg font-medium"
-          >
-            Contact
-          </a>
-          <a
-            href="/resume.pdf"
-            className="px-4 py-3 rounded-lg bg-gradient-to-r from-amber-600 to-orange-500 text-white text-center font-medium hover:shadow-lg transition-all"
-          >
-            Resume
-          </a>
-        </nav>
-      </div>
+            <ul className="flex flex-col items-center gap-8 mb-16">
+              {NAV_LINKS.map((link, i) => (
+                <motion.li
+                  key={link.href}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  <button
+                    onClick={() => scrollToSection(link.href)}
+                    className="text-4xl sm:text-5xl font-display font-bold text-slate-900 dark:text-white hover:text-accent transition-colors"
+                  >
+                    {link.name}
+                  </button>
+                </motion.li>
+              ))}
+            </ul>
+
+            {/* Social Links Row */}
+            <div className="flex gap-8">
+              {SOCIAL_LINKS.map((social, i) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.6 + i * 0.1 }}
+                  className="w-12 h-12 bg-slate-100 dark:bg-white/5 rounded-full flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-accent dark:hover:text-white hover:bg-slate-200 dark:hover:bg-accent transition-all"
+                >
+                  <social.icon size={24} />
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

@@ -1,0 +1,28 @@
+[
+  {
+    "id": "e1",
+    "role": "Software Engineer L1",
+    "company": "Hexaware Technologies",
+    "period": "2024 – Present",
+    "type": "work",
+    "highlights": [
+      "Developing scalable frontend solutions with React 19",
+      "Optimizing application performance by 30% through code-splitting",
+      "Collaborating with cross-functional teams in an Agile environment"
+    ],
+    "tech": ["React", "Node.js", "MongoDB", "Tailwind"]
+  },
+  {
+    "id": "e2",
+    "role": "Electrical Engineering",
+    "company": "GCEK",
+    "period": "2020 – 2024",
+    "type": "education",
+    "highlights": [
+      "Self-taught Full Stack development alongside core engineering",
+      "Designed and developed the EESA Committee official website",
+      "Spearheaded tech initiatives and workshops for 200+ students"
+    ],
+    "tech": ["React", "Tailwind", "Vite", "C++"]
+  }
+]

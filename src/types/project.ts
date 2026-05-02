@@ -6,4 +6,6 @@ export interface Project {
   live: string;
   repo: string;
   image?: string;
+  category: 'client' | 'practice';
+  featured: boolean;
 }

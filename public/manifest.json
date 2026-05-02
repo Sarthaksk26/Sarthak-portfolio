@@ -1,0 +1,22 @@
+{
+  "name": "Sarthak Kumbhar — Portfolio",
+  "short_name": "Sarthak",
+  "description": "Portfolio of Sarthak Kumbhar, a Frontend Engineer specializing in React.",
+  "theme_color": "#6366F1",
+  "background_color": "#0F0F0F",
+  "display": "standalone",
+  "start_url": "/",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
