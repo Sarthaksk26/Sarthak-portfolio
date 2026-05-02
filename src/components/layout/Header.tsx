@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Menu, X, Sun, Moon, ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+
 import { useTheme } from '../../hooks/useTheme';
 import { useActiveSection } from '../../hooks/useActiveSection';
 import Logo from '../ui/Logo';

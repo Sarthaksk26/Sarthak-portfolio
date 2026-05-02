@@ -1,4 +1,5 @@
 import React, { Suspense, lazy } from 'react';
+
 import Layout from './components/layout/Layout';
 import CustomCursor from './components/ui/CustomCursor';
 import ErrorBoundary from './components/ui/ErrorBoundary';

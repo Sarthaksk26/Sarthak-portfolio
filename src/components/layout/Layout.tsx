@@ -1,9 +1,12 @@
 import React from 'react';
-import Header from './Header';
+import { Github, Linkedin, Mail } from 'lucide-react';
+
 import ScrollProgress from '../ui/ScrollProgress';
 import ScrollToTop from '../ui/ScrollToTop';
 import Logo from '../ui/Logo';
-import { Github, Linkedin, Mail } from 'lucide-react';
+
+import Header from './Header';
+
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

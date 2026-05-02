@@ -9,6 +9,7 @@ import SEO from '../components/ui/SEO';
 import { useMagnetic } from '../hooks/useMagnetic';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import ParticleField from '../components/ui/ParticleField';
+
 import ExperienceSection from '@/components/sections/Experience';
 import Skills from '@/components/sections/Skills';
 

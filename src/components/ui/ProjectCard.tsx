@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { Github, ExternalLink, ArrowRight } from 'lucide-react';
+
 import { Project } from '../../types/project';
+
 import TechTag from './TechTag';
 
 interface ProjectCardProps {
