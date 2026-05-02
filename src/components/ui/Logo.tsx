@@ -22,13 +22,6 @@ const Logo: React.FC<{ className?: string }> = ({ className = "h-8" }) => {
       
       {/* Terminal Prompt '>' */}
       <path 
-        d="Point 25 20 L 35 30 L 25 40" 
-        stroke="#F59E0B" 
-        strokeWidth="4" 
-        strokeLinecap="round" 
-        strokeLinejoin="round"
-      />
-      <path 
         d="M 25 20 L 35 30 L 25 40" 
         stroke="#F59E0B" 
         strokeWidth="4" 

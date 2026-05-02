@@ -136,8 +136,7 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4">
             <a
-              href="#"
-              ref={viewWorkRef as React.RefObject<HTMLAnchorElement>}
+              ref={viewWorkRef as any}
               onClick={(e) => {
                 e.preventDefault();
                 document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
@@ -150,7 +149,7 @@ export default function Home() {
               View My Work
             </a>
             <a
-              ref={resumeRef as React.RefObject<HTMLAnchorElement>}
+              ref={resumeRef as any}
               href="/Sarthak_Kumbhar_Frontend_dev.pdf"
               data-cursor="link"
               aria-label="Download Resume"
