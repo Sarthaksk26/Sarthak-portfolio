@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Cpu, X } from 'lucide-react';
+
 import { techStack, TechOrb } from '../../data/techStack';
 import { techStack, TechOrb } from '../../data/techStack';
 

@@ -2,6 +2,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Mail, ChevronDown, Copy, Check, Github, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import ExperienceSection from '@/components/sections/Experience';
+import TechDNA from '@/components/sections/TechDNA';
+
 import projectsData from '../data/projects.json';
 import ProjectCard from '../components/ui/ProjectCard';
 import GitHubPulse from '../components/sections/GitHubPulse';
@@ -13,8 +16,6 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useVisitorContext } from '../hooks/useVisitorContext';
 import ParticleField from '../components/ui/ParticleField';
 
-import ExperienceSection from '@/components/sections/Experience';
-import TechDNA from '@/components/sections/TechDNA';
 
 
 

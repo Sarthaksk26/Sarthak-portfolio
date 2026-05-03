@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, X, Send, Bot, User } from 'lucide-react';
+
 import { useAIChat } from '../../hooks/useAIChat';
 import { cn } from '../../utils/cn';
 

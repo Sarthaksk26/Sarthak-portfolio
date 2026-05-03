@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { cn } from '../../utils/cn';
 import { Check } from 'lucide-react';
+
+import { cn } from '../../utils/cn';
 
 export const ObserverDemo = () => {
   const containerRef = useRef<HTMLDivElement>(null);

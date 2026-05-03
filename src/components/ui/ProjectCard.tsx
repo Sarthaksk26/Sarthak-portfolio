@@ -4,6 +4,7 @@ import { Github, ExternalLink, ArrowRight } from 'lucide-react';
 import { Project } from '../../types/project';
 import { cn } from '../../utils/cn';
 import { getTechIdentity } from '../../utils/gradientMap';
+
 import TechTag from './TechTag';
 
 interface ProjectCardProps {

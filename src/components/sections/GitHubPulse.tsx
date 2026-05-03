@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, GitCommit, GitPullRequest, Star, BookOpen, AlertCircle } from 'lucide-react';
+
 import { useGitHubStats } from '../../hooks/useGitHubStats';
 import { useMagnetic } from '../../hooks/useMagnetic';
 import { cn } from '../../utils/cn';

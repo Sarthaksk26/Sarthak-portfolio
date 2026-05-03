@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Lightbulb, Github, ExternalLink } from 'lucide-react';
+
 import { concepts } from '../../data/concepts';
 import { cn } from '../../utils/cn';
 

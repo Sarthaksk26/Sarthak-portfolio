@@ -1,7 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Briefcase, GraduationCap } from 'lucide-react';
+
 import TechTag from '@/components/ui/TechTag';
+
 import experiencesData from '../../data/experience.json';
 
 interface Experience {
