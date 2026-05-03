@@ -77,7 +77,7 @@ export default function Home() {
   const practiceProjects = (projectsData as Project[]).filter((p) => p.category === 'practice');
 
   return (
-    <div className="space-y-20 sm:space-y-32">
+    <div className="space-y-20 sm:space-y-24">
       <SEO
         title="Home"
         description="Software Engineer at Hexaware Technologies. Expert in React and modern UI engineering."
@@ -298,7 +298,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="container mx-auto px-4 max-w-4xl pb-32 text-center">
+      <section id="contact" className="container mx-auto px-4 max-w-4xl pb-16 text-center">
         <div ref={reveal} data-reveal className="space-y-12">
           <div>
             <h2 className="text-5xl font-display font-bold mb-8 text-gradient">Let's Connect</h2>

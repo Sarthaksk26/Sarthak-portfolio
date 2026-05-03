@@ -24,7 +24,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {children}
       </main>
 
-      <footer className="py-20 border-t border-slate-200 dark:border-white/5 relative overflow-hidden bg-slate-50 dark:bg-[#0F0F0F]">
+      <footer className="py-12 border-t border-slate-200 dark:border-white/5 relative overflow-hidden bg-slate-50 dark:bg-[#0F0F0F]">
         <div className="container mx-auto px-6 max-w-7xl relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="text-center md:text-left flex flex-col items-center md:items-start gap-4">
