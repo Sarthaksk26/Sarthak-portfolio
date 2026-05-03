@@ -7,7 +7,6 @@ import Logo from '../ui/Logo';
 
 import Header from './Header';
 
-
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen theme-transition text-slate-900 dark:text-slate-100 antialiased selection:bg-accent/30 selection:text-accent">
@@ -41,7 +40,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="flex gap-6">
               {[
                 { icon: Github, href: 'https://github.com/Sarthaksk26', label: 'GitHub' },
-                { icon: Linkedin, href: 'https://www.linkedin.com/in/sarthak-kumbhar-6a2669309', label: 'LinkedIn' },
+                {
+                  icon: Linkedin,
+                  href: 'https://www.linkedin.com/in/sarthak-kumbhar-6a2669309',
+                  label: 'LinkedIn',
+                },
                 { icon: Mail, href: 'mailto:sarthakkumbhar26@gmail.com', label: 'Email' },
               ].map((social) => (
                 <a

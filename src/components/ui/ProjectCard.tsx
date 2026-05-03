@@ -71,10 +71,10 @@ const ProjectCard = React.memo(
             {/* Overlay Patterns */}
             <div className="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNmZmZmZmYiLz48L3N2Zz4=')] [background-size:24px_24px]" />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-slate-950/20 to-transparent" />
-            
-            <IdentityIcon 
-              size={isCompact ? 48 : 80} 
-              className="text-white/30 group-hover/card:scale-110 group-hover/card:rotate-6 transition-transform duration-700 relative z-10 drop-shadow-2xl" 
+
+            <IdentityIcon
+              size={isCompact ? 48 : 80}
+              className="text-white/30 group-hover/card:scale-110 group-hover/card:rotate-6 transition-transform duration-700 relative z-10 drop-shadow-2xl"
               strokeWidth={1.5}
             />
 
@@ -84,7 +84,7 @@ const ProjectCard = React.memo(
                 Live
               </div>
             )}
-            
+
             {/* Floating identity label */}
             <div className="absolute bottom-4 right-4 z-20 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white text-[10px] font-bold tracking-widest uppercase shadow-xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
               {identity.label}

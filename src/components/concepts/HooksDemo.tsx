@@ -27,18 +27,24 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => voi
 export const HooksDemo = () => {
   const [name, setName] = useLocalStorage('demo_name', 'Visitor');
   const [theme, setTheme] = useLocalStorage('demo_theme', 'light');
-  
+
   // To show the actual localStorage state visually
   const [rawStorage, setRawStorage] = useState('');
 
   useEffect(() => {
     const updateStorageView = () => {
-      setRawStorage(JSON.stringify({
-        demo_name: window.localStorage.getItem('demo_name'),
-        demo_theme: window.localStorage.getItem('demo_theme')
-      }, null, 2));
+      setRawStorage(
+        JSON.stringify(
+          {
+            demo_name: window.localStorage.getItem('demo_name'),
+            demo_theme: window.localStorage.getItem('demo_theme'),
+          },
+          null,
+          2
+        )
+      );
     };
-    
+
     updateStorageView();
     window.addEventListener('storage', updateStorageView);
     return () => window.removeEventListener('storage', updateStorageView);
@@ -52,7 +58,7 @@ export const HooksDemo = () => {
           <Save size={18} className="text-accent" />
           Component State
         </div>
-        
+
         <div>
           <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
             Name
@@ -99,17 +105,15 @@ export const HooksDemo = () => {
           <span>Browser LocalStorage</span>
         </div>
         <div className="p-4 flex-1 overflow-auto bg-[#0a0a0a]">
-          <pre className="text-sm font-mono text-emerald-400">
-            {rawStorage}
-          </pre>
+          <pre className="text-sm font-mono text-emerald-400">{rawStorage}</pre>
         </div>
-        
+
         <div className="bg-slate-800 p-3 text-xs font-mono text-slate-300 border-t border-slate-700">
           <span>Hook Usage</span>
         </div>
         <div className="p-4 bg-[#0a0a0a]">
           <pre className="text-xs font-mono text-blue-400">
-{`const [name, setName] = 
+            {`const [name, setName] = 
   useLocalStorage('demo_name', 'Visitor');
 
 const [theme, setTheme] = 

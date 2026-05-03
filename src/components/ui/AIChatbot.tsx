@@ -34,8 +34,8 @@ export const AIChatbot = () => {
       <button
         onClick={() => setIsOpen(true)}
         className={cn(
-          "fixed bottom-6 right-6 z-[900] w-14 h-14 bg-gradient-to-r from-accent to-purple-600 rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition-transform",
-          isOpen && "hidden"
+          'fixed bottom-6 right-6 z-[900] w-14 h-14 bg-gradient-to-r from-accent to-purple-600 rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition-transform',
+          isOpen && 'hidden'
         )}
       >
         <MessageSquare size={24} />
@@ -56,7 +56,7 @@ export const AIChatbot = () => {
                 <Bot size={20} />
                 <span className="font-bold">Ask Sarthak (AI)</span>
               </div>
-              <button 
+              <button
                 onClick={() => setIsOpen(false)}
                 className="hover:bg-white/20 p-1 rounded-full transition-colors"
               >
@@ -67,30 +67,38 @@ export const AIChatbot = () => {
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50 dark:bg-slate-900">
               {messages.map((msg) => (
-                <div 
-                  key={msg.id} 
+                <div
+                  key={msg.id}
                   className={cn(
-                    "flex max-w-[85%]",
-                    msg.role === 'user' ? "ml-auto justify-end" : "mr-auto justify-start"
+                    'flex max-w-[85%]',
+                    msg.role === 'user' ? 'ml-auto justify-end' : 'mr-auto justify-start'
                   )}
                 >
-                  <div className={cn(
-                    "p-3 rounded-2xl text-sm leading-relaxed shadow-sm",
-                    msg.role === 'user' 
-                      ? "bg-accent text-white rounded-tr-none" 
-                      : "bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-tl-none"
-                  )}>
+                  <div
+                    className={cn(
+                      'p-3 rounded-2xl text-sm leading-relaxed shadow-sm',
+                      msg.role === 'user'
+                        ? 'bg-accent text-white rounded-tr-none'
+                        : 'bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-tl-none'
+                    )}
+                  >
                     {msg.content}
                   </div>
                 </div>
               ))}
-              
+
               {isLoading && (
                 <div className="flex max-w-[85%] mr-auto justify-start">
                   <div className="bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 p-4 rounded-2xl rounded-tl-none shadow-sm flex gap-2">
                     <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" />
-                    <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
-                    <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }} />
+                    <span
+                      className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"
+                      style={{ animationDelay: '0.2s' }}
+                    />
+                    <span
+                      className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"
+                      style={{ animationDelay: '0.4s' }}
+                    />
                   </div>
                 </div>
               )}
@@ -98,7 +106,10 @@ export const AIChatbot = () => {
             </div>
 
             {/* Input Form */}
-            <form onSubmit={handleSubmit} className="p-3 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex gap-2">
+            <form
+              onSubmit={handleSubmit}
+              className="p-3 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex gap-2"
+            >
               <input
                 type="text"
                 value={input}

@@ -16,9 +16,6 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useVisitorContext } from '../hooks/useVisitorContext';
 import ParticleField from '../components/ui/ParticleField';
 
-
-
-
 const GREETING_WORDS = [
   'Frontend Engineer',
   'React Developer',
@@ -114,7 +111,13 @@ export default function Home() {
               >
                 {visitorContext.emoji} {visitorContext.greeting}
                 {visitorContext.city && visitorContext.country && (
-                  <span> from <strong className="text-slate-900 dark:text-white">{visitorContext.city}, {visitorContext.country}</strong></span>
+                  <span>
+                    {' '}
+                    from{' '}
+                    <strong className="text-slate-900 dark:text-white">
+                      {visitorContext.city}, {visitorContext.country}
+                    </strong>
+                  </span>
                 )}
                 <span className="opacity-70"> — welcome to my portfolio.</span>
               </motion.div>

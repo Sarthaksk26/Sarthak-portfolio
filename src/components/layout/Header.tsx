@@ -20,7 +20,11 @@ const NAV_LINKS = [
 
 const SOCIAL_LINKS = [
   { icon: Github, href: 'https://github.com/Sarthaksk26', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://www.linkedin.com/in/sarthak-kumbhar-6a2669309', label: 'LinkedIn' },
+  {
+    icon: Linkedin,
+    href: 'https://www.linkedin.com/in/sarthak-kumbhar-6a2669309',
+    label: 'LinkedIn',
+  },
   { icon: Mail, href: 'mailto:sarthakkumbhar26@gmail.com', label: 'Email' },
 ];
 

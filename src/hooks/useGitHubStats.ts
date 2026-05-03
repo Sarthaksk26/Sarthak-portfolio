@@ -28,12 +28,17 @@ export const useGitHubStats = (username: string) => {
         const userData = await userRes.json();
 
         // Fetch repos (up to 100 per page to get all stats)
-        const reposRes = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=updated`);
+        const reposRes = await fetch(
+          `https://api.github.com/users/${username}/repos?per_page=100&sort=updated`
+        );
         if (!reposRes.ok) throw new Error('Failed to fetch repos');
         const reposData = await reposRes.json();
 
         // Calculate total stars
-        const totalStars = reposData.reduce((acc: number, repo: { stargazers_count: number }) => acc + repo.stargazers_count, 0);
+        const totalStars = reposData.reduce(
+          (acc: number, repo: { stargazers_count: number }) => acc + repo.stargazers_count,
+          0
+        );
 
         // Calculate language breakdown
         const languages: Record<string, number> = {};
@@ -53,16 +58,20 @@ export const useGitHubStats = (username: string) => {
           .slice(0, 4);
 
         // Fetch recent activity (Events API)
-        const eventsRes = await fetch(`https://api.github.com/users/${username}/events/public?per_page=5`);
+        const eventsRes = await fetch(
+          `https://api.github.com/users/${username}/events/public?per_page=5`
+        );
         let recentActivity = [];
         if (eventsRes.ok) {
           const eventsData = await eventsRes.json();
-          recentActivity = eventsData.map((event: { id: string; type: string; repo: { name: string }; created_at: string }) => ({
-            id: event.id,
-            type: event.type,
-            repo: event.repo.name,
-            date: new Date(event.created_at).toLocaleDateString(),
-          }));
+          recentActivity = eventsData.map(
+            (event: { id: string; type: string; repo: { name: string }; created_at: string }) => ({
+              id: event.id,
+              type: event.type,
+              repo: event.repo.name,
+              date: new Date(event.created_at).toLocaleDateString(),
+            })
+          );
         }
 
         setStats({

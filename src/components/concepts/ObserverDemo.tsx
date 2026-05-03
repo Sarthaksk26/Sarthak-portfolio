@@ -18,7 +18,7 @@ export const ObserverDemo = () => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         const targetId = Number(entry.target.getAttribute('data-id'));
-        
+
         if (entry.isIntersecting) {
           setVisibleBoxes((prev) => [...new Set([...prev, targetId])]);
           setLogs((prev) => [`Box ${targetId} entered viewport`, ...prev].slice(0, 5));
@@ -38,13 +38,13 @@ export const ObserverDemo = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[400px]">
       {/* Scrollable Container */}
-      <div 
+      <div
         ref={containerRef}
         className="relative overflow-y-auto rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-4 space-y-32 snap-y snap-mandatory scroll-smooth"
         style={{ scrollbarWidth: 'thin' }}
       >
         <div className="text-center text-slate-400 text-sm py-4">Scroll down ↓</div>
-        
+
         {[1, 2, 3, 4, 5].map((id) => {
           const isVisible = visibleBoxes.includes(id);
           return (
@@ -52,17 +52,17 @@ export const ObserverDemo = () => {
               key={id}
               data-id={id}
               className={cn(
-                "observer-box h-32 rounded-xl flex items-center justify-center font-display font-bold text-2xl transition-all duration-700 snap-center shadow-lg",
-                isVisible 
-                  ? "bg-accent text-white scale-100 opacity-100" 
-                  : "bg-slate-200 dark:bg-slate-800 text-slate-400 scale-90 opacity-50"
+                'observer-box h-32 rounded-xl flex items-center justify-center font-display font-bold text-2xl transition-all duration-700 snap-center shadow-lg',
+                isVisible
+                  ? 'bg-accent text-white scale-100 opacity-100'
+                  : 'bg-slate-200 dark:bg-slate-800 text-slate-400 scale-90 opacity-50'
               )}
             >
               Box {id}
             </div>
           );
         })}
-        
+
         <div className="h-10"></div>
       </div>
 
@@ -77,21 +77,19 @@ export const ObserverDemo = () => {
         </div>
         <div className="p-4 flex-1 overflow-y-auto space-y-2 font-mono text-sm">
           {logs.map((log, i) => (
-            <div 
-              key={i} 
+            <div
+              key={i}
               className={cn(
-                "flex items-center gap-2 transition-all",
-                i === 0 ? "text-white" : "text-slate-500",
-                log.includes('entered') ? "text-emerald-400" : ""
+                'flex items-center gap-2 transition-all',
+                i === 0 ? 'text-white' : 'text-slate-500',
+                log.includes('entered') ? 'text-emerald-400' : ''
               )}
             >
               {log.includes('entered') ? <Check size={14} /> : <span className="w-3.5" />}
               {log}
             </div>
           ))}
-          {logs.length === 0 && (
-            <div className="text-slate-600">Waiting for scroll events...</div>
-          )}
+          {logs.length === 0 && <div className="text-slate-600">Waiting for scroll events...</div>}
         </div>
       </div>
     </div>

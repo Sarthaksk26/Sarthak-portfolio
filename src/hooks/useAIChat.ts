@@ -29,8 +29,9 @@ export const useAIChat = () => {
     {
       id: '1',
       role: 'assistant',
-      content: 'Hi! I am the AI assistant for Sarthaks portfolio. I can answer questions about his experience, skills, and projects. What would you like to know?',
-    }
+      content:
+        'Hi! I am the AI assistant for Sarthaks portfolio. I can answer questions about his experience, skills, and projects. What would you like to know?',
+    },
   ]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -39,17 +40,17 @@ export const useAIChat = () => {
 
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
     const userMessage: Message = { id: Date.now().toString(), role: 'user', content };
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setIsLoading(true);
 
     if (!apiKey || apiKey === 'your_api_key_here') {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       const errorMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
         content: 'I need an API key to think! Please add VITE_GEMINI_API_KEY to your .env file.',
       };
-      setMessages(prev => [...prev, errorMsg]);
+      setMessages((prev) => [...prev, errorMsg]);
       setIsLoading(false);
       return;
     }
@@ -64,15 +65,17 @@ export const useAIChat = () => {
           body: JSON.stringify({
             contents: [
               {
-                parts: [{ text: SYSTEM_INSTRUCTION + "\n\nUser Question: " + content }]
-              }
-            ]
+                parts: [{ text: SYSTEM_INSTRUCTION + '\n\nUser Question: ' + content }],
+              },
+            ],
           }),
         }
       );
 
       const data = await response.json();
-      const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I encountered an error processing your request.";
+      const aiResponse =
+        data.candidates?.[0]?.content?.parts?.[0]?.text ||
+        "I'm sorry, I encountered an error processing your request.";
 
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -80,14 +83,14 @@ export const useAIChat = () => {
         content: aiResponse,
       };
 
-      setMessages(prev => [...prev, assistantMessage]);
+      setMessages((prev) => [...prev, assistantMessage]);
     } catch {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
         content: "Sorry, I'm having trouble connecting to my brain right now.",
       };
-      setMessages(prev => [...prev, errorMessage]);
+      setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
     }

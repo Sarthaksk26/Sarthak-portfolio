@@ -6,7 +6,6 @@ import remarkGfm from 'remark-gfm';
 
 import { Project } from '../../types/project';
 
-
 interface ProjectModalProps {
   project: Project | null;
   onClose: () => void;
@@ -28,7 +27,9 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
         setContent(text);
       } catch (err) {
         console.error(err);
-        setContent('> Failed to load project details. Please visit the GitHub repository directly.');
+        setContent(
+          '> Failed to load project details. Please visit the GitHub repository directly.'
+        );
       } finally {
         setLoading(false);
       }
@@ -114,9 +115,7 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                 </div>
               ) : (
                 <div className="prose prose-slate dark:prose-invert max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-accent hover:prose-a:text-accent/80 prose-img:rounded-xl prose-img:shadow-lg prose-pre:bg-slate-900 prose-pre:border prose-pre:border-slate-800">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                    {content}
-                  </ReactMarkdown>
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
                 </div>
               )}
             </div>

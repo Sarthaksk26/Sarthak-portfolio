@@ -8,9 +8,9 @@ import { techStack, TechOrb } from '../../data/techStack';
 export const TechDNA = () => {
   const [hoveredTech, setHoveredTech] = useState<TechOrb | null>(null);
 
-  const innerRing = useMemo(() => techStack.filter(t => t.ring === 'inner'), []);
-  const middleRing = useMemo(() => techStack.filter(t => t.ring === 'middle'), []);
-  const outerRing = useMemo(() => techStack.filter(t => t.ring === 'outer'), []);
+  const innerRing = useMemo(() => techStack.filter((t) => t.ring === 'inner'), []);
+  const middleRing = useMemo(() => techStack.filter((t) => t.ring === 'middle'), []);
+  const outerRing = useMemo(() => techStack.filter((t) => t.ring === 'outer'), []);
 
   return (
     <section id="skills" className="py-32 relative overflow-hidden bg-[#0A0A0A]">
@@ -24,13 +24,13 @@ export const TechDNA = () => {
             Tech DNA
           </h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-            My technological ecosystem. Core competencies orbit closest to the center, surrounded by secondary tools and the broader development ecosystem.
+            My technological ecosystem. Core competencies orbit closest to the center, surrounded by
+            secondary tools and the broader development ecosystem.
           </p>
         </div>
 
         {/* The Orbital System - DESKTOP */}
         <div className="hidden sm:flex relative w-[500px] h-[500px] md:w-[600px] md:h-[600px] items-center justify-center mb-16">
-
           {/* Center (You) */}
           <div className="absolute z-50 w-24 h-24 bg-gradient-to-br from-accent to-purple-600 rounded-full flex items-center justify-center shadow-[0_0_60px_rgba(139,92,246,0.4)] border-4 border-[#0A0A0A]">
             <span className="text-white font-display font-bold text-3xl tracking-tighter">SK</span>

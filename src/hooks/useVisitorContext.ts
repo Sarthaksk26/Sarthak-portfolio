@@ -55,7 +55,7 @@ export const useVisitorContext = (): VisitorContext => {
         const hour = new Date().getHours();
         let greeting = 'Welcome';
         let emoji = '👋';
-        
+
         if (hour >= 5 && hour < 12) {
           greeting = 'Good morning';
           emoji = '☀️';

@@ -55,7 +55,11 @@ const ExperienceSection: React.FC = () => {
                   <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6 mb-8">
                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
                       <div className="w-16 h-16 flex items-center justify-center bg-amber-100 dark:bg-amber-900/20 rounded-2xl text-amber-600 grayscale group-hover:grayscale-0 transition-all duration-500">
-                        {exp.type === 'work' ? <Briefcase size={32} /> : <GraduationCap size={32} />}
+                        {exp.type === 'work' ? (
+                          <Briefcase size={32} />
+                        ) : (
+                          <GraduationCap size={32} />
+                        )}
                       </div>
                       <div>
                         <h3 className="text-2xl sm:text-3xl font-display font-bold bg-gradient-to-r from-amber-600 to-orange-500 bg-clip-text text-transparent">
