@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
 import { Project } from '../../types/project';
-import { cn } from '../../utils/cn';
+
 
 interface ProjectModalProps {
   project: Project | null;

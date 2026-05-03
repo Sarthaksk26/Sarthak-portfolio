@@ -33,11 +33,11 @@ export const useGitHubStats = (username: string) => {
         const reposData = await reposRes.json();
 
         // Calculate total stars
-        const totalStars = reposData.reduce((acc: number, repo: any) => acc + repo.stargazers_count, 0);
+        const totalStars = reposData.reduce((acc: number, repo: { stargazers_count: number }) => acc + repo.stargazers_count, 0);
 
         // Calculate language breakdown
         const languages: Record<string, number> = {};
-        reposData.forEach((repo: any) => {
+        reposData.forEach((repo: { language: string | null }) => {
           if (repo.language) {
             languages[repo.language] = (languages[repo.language] || 0) + 1;
           }
@@ -57,7 +57,7 @@ export const useGitHubStats = (username: string) => {
         let recentActivity = [];
         if (eventsRes.ok) {
           const eventsData = await eventsRes.json();
-          recentActivity = eventsData.map((event: any) => ({
+          recentActivity = eventsData.map((event: { id: string; type: string; repo: { name: string }; created_at: string }) => ({
             id: event.id,
             type: event.type,
             repo: event.repo.name,
@@ -73,8 +73,8 @@ export const useGitHubStats = (username: string) => {
           loading: false,
           error: null,
         });
-      } catch (error: any) {
-        setStats((prev) => ({ ...prev, loading: false, error: error.message }));
+      } catch (error) {
+        setStats((prev) => ({ ...prev, loading: false, error: (error as Error).message }));
       }
     };
 

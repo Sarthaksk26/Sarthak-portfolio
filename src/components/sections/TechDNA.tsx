@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Cpu, X } from 'lucide-react';
 import { techStack, TechOrb } from '../../data/techStack';
-import { cn } from '../../utils/cn';
+import { techStack, TechOrb } from '../../data/techStack';
 
 export const TechDNA = () => {
   const [hoveredTech, setHoveredTech] = useState<TechOrb | null>(null);
@@ -48,7 +48,6 @@ export const TechDNA = () => {
                 angle={angle}
                 radius={ringSize}
                 setHoveredTech={setHoveredTech}
-                animClass="animate-[spin_25s_linear_infinite]"
               />
             );
           })}
@@ -66,7 +65,6 @@ export const TechDNA = () => {
                 angle={angle}
                 radius={ringSize}
                 setHoveredTech={setHoveredTech}
-                animClass="animate-[spin_40s_linear_infinite_reverse]"
               />
             );
           })}
@@ -84,7 +82,6 @@ export const TechDNA = () => {
                 angle={angle}
                 radius={ringSize}
                 setHoveredTech={setHoveredTech}
-                animClass="animate-[spin_55s_linear_infinite]"
               />
             );
           })}
@@ -133,13 +130,11 @@ const OrbitalNode = ({
   angle,
   radius,
   setHoveredTech,
-  animClass,
 }: {
   tech: TechOrb;
   angle: number;
   radius: number;
   setHoveredTech: (t: TechOrb | null) => void;
-  animClass: string;
 }) => {
   // Convert polar to cartesian (% based from center)
   const rad = (angle * Math.PI) / 180;

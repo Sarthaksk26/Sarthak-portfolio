@@ -50,7 +50,7 @@ export const useVisitorContext = (): VisitorContext => {
           emoji,
           loading: false,
         });
-      } catch (error) {
+      } catch {
         // Fallback to generic greeting if API fails or adblock blocks it
         const hour = new Date().getHours();
         let greeting = 'Welcome';

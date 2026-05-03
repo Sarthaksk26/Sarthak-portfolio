@@ -20,7 +20,10 @@ export const DebounceDemo = () => {
   }, [rawText]);
 
   // Throttle logic
-  const lastRan = useRef(Date.now());
+  const lastRan = useRef(0);
+  useEffect(() => {
+    lastRan.current = Date.now();
+  }, []);
   useEffect(() => {
     const handler = setTimeout(() => {
       if (Date.now() - lastRan.current >= 1000) {

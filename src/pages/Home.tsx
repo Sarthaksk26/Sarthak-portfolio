@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Mail, ChevronDown, Copy, Check, Github, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -16,7 +16,7 @@ import ParticleField from '../components/ui/ParticleField';
 import ExperienceSection from '@/components/sections/Experience';
 import TechDNA from '@/components/sections/TechDNA';
 
-const projects = projectsData as Project[];
+
 
 const GREETING_WORDS = [
   'Frontend Engineer',
