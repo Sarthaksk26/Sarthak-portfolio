@@ -44,12 +44,11 @@ const FloatingBadge = React.memo(
 export default function Home() {
   const [emailCopied, setEmailCopied] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
 
   const myEmail = 'sarthakkumbhar26@gmail.com';
 
-  const viewWorkRef = useMagnetic(0.2);
-  const resumeRef = useMagnetic(0.2);
+  const viewWorkRef = useMagnetic<HTMLAnchorElement>(0.2);
+  const resumeRef = useMagnetic<HTMLAnchorElement>(0.2);
   const reveal = useScrollReveal();
 
   useEffect(() => {
@@ -57,11 +56,8 @@ export default function Home() {
       setWordIndex((prev) => (prev + 1) % GREETING_WORDS.length);
     }, 2500);
 
-    const timer = setTimeout(() => setIsLoading(false), 800);
-
     return () => {
       clearInterval(interval);
-      clearTimeout(timer);
     };
   }, []);
 
@@ -136,7 +132,7 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4">
             <a
-              ref={viewWorkRef as any}
+              ref={viewWorkRef}
               onClick={(e) => {
                 e.preventDefault();
                 document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
@@ -149,7 +145,7 @@ export default function Home() {
               View My Work
             </a>
             <a
-              ref={resumeRef as any}
+              ref={resumeRef}
               href="/Sarthak_Kumbhar_Frontend_dev.pdf"
               data-cursor="link"
               aria-label="Download Resume"
@@ -209,11 +205,9 @@ export default function Home() {
           </motion.div>
 
           <div className="grid gap-12 grid-cols-1 lg:grid-cols-2">
-            {isLoading
-              ? [1, 2].map((i) => <div key={i} className="aspect-video rounded-[3rem] skeleton" />)
-              : clientProjects.map((p) => (
-                  <ProjectCard key={p.id} project={p} variant="default" showLiveBadge={true} />
-                ))}
+            {clientProjects.map((p) => (
+              <ProjectCard key={p.id} project={p} variant="default" showLiveBadge={true} />
+            ))}
           </div>
         </div>
 
@@ -243,13 +237,9 @@ export default function Home() {
           </motion.div>
 
           <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {isLoading
-              ? [1, 2, 3].map((i) => (
-                  <div key={i} className="aspect-video rounded-[2.5rem] skeleton" />
-                ))
-              : practiceProjects.map((p) => (
-                  <ProjectCard key={p.id} project={p} variant="compact" />
-                ))}
+            {practiceProjects.map((p) => (
+              <ProjectCard key={p.id} project={p} variant="compact" />
+            ))}
           </div>
         </div>
 

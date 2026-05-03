@@ -64,7 +64,7 @@ const Skills: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl sm:text-6xl font-display font-bold mb-6 bg-gradient-to-r from-amber-600 to-orange-500 bg-clip-text text-transparent inline-block"
+            className="text-4xl sm:text-6xl font-display font-bold mb-6 bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent inline-block"
           >
             Skills & Technologies
           </motion.h2>
@@ -105,7 +105,7 @@ const Skills: React.FC = () => {
                         whileInView={{ width: `${(skill.level / 5) * 100}%` }}
                         viewport={{ once: true }}
                         transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
-                        className="h-full bg-gradient-to-r from-amber-400 to-orange-500 rounded-full"
+                        className="h-full bg-gradient-to-r from-accent to-secondary rounded-full"
                       />
                     </div>
                   </div>

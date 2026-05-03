@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Github, ExternalLink, ArrowRight } from 'lucide-react';
 
 import { Project } from '../../types/project';
-
+import { cn } from '../../utils/cn';
 import TechTag from './TechTag';
 
 interface ProjectCardProps {
@@ -49,14 +49,20 @@ const ProjectCard = React.memo(
         style={{ transform, transformStyle: 'preserve-3d' }}
       >
         <article
-          className={`h-full glass ${isCompact ? 'p-4' : 'p-6 sm:p-10'} rounded-[2.5rem] border border-slate-200 dark:border-white/10 hover:border-accent/40 transition-all duration-500 relative z-10 overflow-hidden flex flex-col shadow-2xl group/card`}
+          className={cn(
+            'h-full glass rounded-[2.5rem] border border-slate-200 dark:border-white/10 hover:border-accent/40 transition-all duration-500 relative z-10 overflow-hidden flex flex-col shadow-2xl group/card',
+            isCompact ? 'p-4' : 'p-6 sm:p-10'
+          )}
         >
           {/* Shine Sweep */}
           <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-25deg] pointer-events-none" />
 
           {/* Project Image */}
           <div
-            className={`relative mb-6 overflow-hidden rounded-2xl ${isCompact ? 'aspect-[16/9]' : 'aspect-video'}`}
+            className={cn(
+              'relative mb-6 overflow-hidden rounded-2xl',
+              isCompact ? 'aspect-[16/9]' : 'aspect-video'
+            )}
           >
             <img
               src={imageUrl}
@@ -82,7 +88,10 @@ const ProjectCard = React.memo(
                   {project.category}
                 </span>
                 <h3
-                  className={`font-display font-bold text-slate-900 dark:text-white group-hover:text-accent transition-colors ${isCompact ? 'text-lg' : 'text-2xl sm:text-3xl'}`}
+                  className={cn(
+                    'font-display font-bold text-slate-900 dark:text-white group-hover:text-accent transition-colors',
+                    isCompact ? 'text-lg' : 'text-2xl sm:text-3xl'
+                  )}
                 >
                   {project.title}
                 </h3>

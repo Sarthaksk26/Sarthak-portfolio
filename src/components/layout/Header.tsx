@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../hooks/useTheme';
 import { useActiveSection } from '../../hooks/useActiveSection';
 import Logo from '../ui/Logo';
+import { cn } from '../../utils/cn';
 
 const NAV_LINKS = [
   { name: 'Home', href: 'hero' },
@@ -17,7 +18,7 @@ const NAV_LINKS = [
 
 const SOCIAL_LINKS = [
   { icon: Github, href: 'https://github.com/Sarthaksk26', label: 'GitHub' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/sarthak-kumbhar/', label: 'LinkedIn' },
   { icon: Mail, href: 'mailto:sarthakkumbhar26@gmail.com', label: 'Email' },
 ];
 
@@ -55,11 +56,12 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-[800] transition-all duration-500 ${
+        className={cn(
+          'fixed top-0 left-0 right-0 z-[800] transition-all duration-500',
           isScrolled
             ? 'py-3 bg-white/90 dark:bg-[#0F0F0F]/90 backdrop-blur-xl border-b border-slate-200 dark:border-white/10 shadow-sm'
             : 'py-6 bg-transparent'
-        }`}
+        )}
       >
         <div className="container mx-auto px-6 flex items-center justify-between max-w-[1200px]">
           {/* Logo Monogram */}
@@ -85,11 +87,12 @@ export default function Header() {
                 >
                   <button
                     onClick={() => scrollToSection(link.href)}
-                    className={`transition-colors duration-300 ${
+                    className={cn(
+                      'transition-colors duration-300',
                       activeSection === link.href
                         ? 'text-accent'
                         : 'text-slate-500 dark:text-slate-400 dark:hover:text-white hover:text-slate-900'
-                    }`}
+                    )}
                   >
                     {link.name}
                   </button>

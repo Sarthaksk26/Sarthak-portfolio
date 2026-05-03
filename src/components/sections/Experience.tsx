@@ -1,39 +1,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MapPin } from 'lucide-react';
-
+import { MapPin, Briefcase, GraduationCap } from 'lucide-react';
 import TechTag from '@/components/ui/TechTag';
+import experiencesData from '../../data/experience.json';
 
 interface Experience {
   id: string;
   company: string;
   role: string;
   period: string;
-  type: 'full-time' | 'internship';
-  description: string[];
-  skills: string[];
-  logo: string;
-  location: string;
+  type: string;
+  highlights: string[];
+  tech: string[];
 }
 
-const experiences: Experience[] = [
-  {
-    id: 'hex-1',
-    company: 'Hexaware Technologies',
-    role: 'Software Engineer Level 1',
-    period: '2024 — Present',
-    type: 'full-time',
-    location: 'Mumbai, India',
-    description: [
-      'Developing and maintaining enterprise web applications using React and TypeScript.',
-      'Collaborating with cross-functional teams in Agile sprints to deliver features on schedule.',
-      'Participating in code reviews and contributing to internal tooling improvements.',
-      'Learning and applying modern engineering practices across the software development lifecycle.',
-    ],
-    skills: ['React', 'TypeScript', 'REST APIs', 'Agile', 'Git', 'JavaScript'],
-    logo: '🏢',
-  },
-];
+const experiences = experiencesData as Experience[];
 
 const ExperienceSection: React.FC = () => {
   return (
@@ -71,8 +52,8 @@ const ExperienceSection: React.FC = () => {
                 <div className="bg-white dark:bg-slate-900/50 rounded-[2.5rem] p-8 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-xl hover:shadow-2xl transition-all duration-500 group">
                   <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6 mb-8">
                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-                      <div className="text-5xl sm:text-6xl grayscale group-hover:grayscale-0 transition-all duration-500">
-                        {exp.logo}
+                      <div className="w-16 h-16 flex items-center justify-center bg-amber-100 dark:bg-amber-900/20 rounded-2xl text-amber-600 grayscale group-hover:grayscale-0 transition-all duration-500">
+                        {exp.type === 'work' ? <Briefcase size={32} /> : <GraduationCap size={32} />}
                       </div>
                       <div>
                         <h3 className="text-2xl sm:text-3xl font-display font-bold bg-gradient-to-r from-amber-600 to-orange-500 bg-clip-text text-transparent">
@@ -82,13 +63,13 @@ const ExperienceSection: React.FC = () => {
                           {exp.role}
                         </p>
 
-                        {exp.type === 'full-time' && (
+                        {exp.type === 'work' && (
                           <div className="mt-3 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-bold uppercase tracking-wider">
                             <span className="relative flex h-2 w-2">
                               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                               <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                             </span>
-                            Open to Opportunities
+                            Active Professional
                           </div>
                         )}
                       </div>
@@ -98,15 +79,11 @@ const ExperienceSection: React.FC = () => {
                       <span className="inline-block px-4 py-1.5 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-500 text-sm font-bold shadow-sm">
                         {exp.period}
                       </span>
-                      <div className="flex items-center gap-2 text-slate-400 text-sm mt-1">
-                        <MapPin size={16} className="text-slate-300 dark:text-slate-600" />
-                        {exp.location}
-                      </div>
                     </div>
                   </div>
 
                   <div className="space-y-4 mb-10">
-                    {exp.description.map((item, i) => (
+                    {exp.highlights.map((item, i) => (
                       <div key={i} className="flex gap-4 group/item">
                         <span className="text-amber-600 font-bold group-hover/item:translate-x-1 transition-transform">
                           →
@@ -117,8 +94,8 @@ const ExperienceSection: React.FC = () => {
                   </div>
 
                   <div className="flex flex-wrap gap-2 pt-8 border-t border-slate-100 dark:border-slate-800">
-                    {exp.skills.map((skill) => (
-                      <TechTag key={skill} name={skill} />
+                    {exp.tech.map((skill) => (
+                      <TechTag key={skill} tag={skill} />
                     ))}
                   </div>
                 </div>

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 
-export const useMagnetic = (strength: number = 0.3) => {
-  const ref = useRef<HTMLElement>(null);
+export const useMagnetic = <T extends HTMLElement = HTMLElement>(strength: number = 0.3) => {
+  const ref = useRef<T>(null);
 
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
