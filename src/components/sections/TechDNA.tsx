@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Cpu, X } from 'lucide-react';
 
 import { techStack, TechOrb } from '../../data/techStack';
-import { techStack, TechOrb } from '../../data/techStack';
 
 export const TechDNA = () => {
   const [hoveredTech, setHoveredTech] = useState<TechOrb | null>(null);
