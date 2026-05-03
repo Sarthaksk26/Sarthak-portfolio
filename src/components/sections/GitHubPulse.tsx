@@ -9,7 +9,7 @@ import { cn } from '../../utils/cn';
 const GitHubPulse = () => {
   const { publicRepos, totalStars, topLanguages, recentActivity, loading, error } =
     useGitHubStats('Sarthaksk26');
-  const magneticRef = useMagnetic();
+  const magneticRef = useMagnetic<HTMLAnchorElement>();
 
   const getEventIcon = (type: string) => {
     switch (type) {

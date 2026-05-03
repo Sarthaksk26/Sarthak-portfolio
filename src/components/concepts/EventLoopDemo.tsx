@@ -64,7 +64,7 @@ export const EventLoopDemo = () => {
     await delay(400);
 
     // 5. Event loop moves Task Queue to Call Stack
-    const task = { id: 'cb1', name: "cb: log('Timeout')", type: 'async' };
+    const task: Task = { id: 'cb1', name: "cb: log('Timeout')", type: 'async' };
     setTaskQueue([]);
     setCallStack([task]);
     await delay(800);

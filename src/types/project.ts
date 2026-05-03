@@ -8,4 +8,5 @@ export interface Project {
   image?: string;
   category: 'client' | 'practice';
   featured: boolean;
+  readmeUrl?: string;
 }
