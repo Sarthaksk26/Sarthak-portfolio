@@ -41,7 +41,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="flex gap-6">
               {[
                 { icon: Github, href: 'https://github.com/Sarthaksk26', label: 'GitHub' },
-                { icon: Linkedin, href: 'https://www.linkedin.com/in/sarthak-kumbhar/', label: 'LinkedIn' },
+                { icon: Linkedin, href: 'https://www.linkedin.com/in/sarthak-kumbhar-6a2669309', label: 'LinkedIn' },
                 { icon: Mail, href: 'mailto:sarthakkumbhar26@gmail.com', label: 'Email' },
               ].map((social) => (
                 <a

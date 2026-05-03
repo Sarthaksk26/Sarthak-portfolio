@@ -9,16 +9,18 @@ import { cn } from '../../utils/cn';
 
 const NAV_LINKS = [
   { name: 'Home', href: 'hero' },
-  { name: 'Projects', href: 'projects' },
-  { name: 'Skills', href: 'skills' },
   { name: 'Journey', href: 'journey' },
+  { name: 'Projects', href: 'projects' },
+  { name: 'Knowledge', href: 'knowledge-lab' },
+  { name: 'Pulse', href: 'pulse' },
+  { name: 'Skills', href: 'skills' },
   { name: 'About', href: 'about' },
   { name: 'Contact', href: 'contact' },
 ];
 
 const SOCIAL_LINKS = [
   { icon: Github, href: 'https://github.com/Sarthaksk26', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://www.linkedin.com/in/sarthak-kumbhar/', label: 'LinkedIn' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/sarthak-kumbhar-6a2669309', label: 'LinkedIn' },
   { icon: Mail, href: 'mailto:sarthakkumbhar26@gmail.com', label: 'Email' },
 ];
 

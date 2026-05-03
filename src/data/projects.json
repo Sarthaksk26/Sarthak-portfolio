@@ -3,30 +3,20 @@
     "id": "p1",
     "title": "EESA Committee",
     "description": "Official website for the Electrical Engineering Student's Association of GCEK — serving real students and faculty.",
-    "tech": ["React", "Vite", "Tailwind"],
+    "tech": ["React", "Vite", "Tailwind", "Framer Motion", "TypeScript"],
     "repo": "https://github.com/Sarthaksk26/eesa-website",
     "live": "https://eesa-gcek.onrender.com/",
     "category": "client",
     "featured": true
   },
   {
-    "id": "p2",
-    "title": "Call Manager Pro",
-    "description": "Priority-Based Customer Call Management System built for operational use.",
-    "tech": ["HTML", "CSS3", "Javascript", "Node.js", "Express.js", "MongoDB"],
-    "repo": "https://github.com/Sarthaksk26/call-manager-pro",
-    "live": "https://call-manager-pro.vercel.app/",
-    "category": "client",
-    "featured": true
-  },
-  {
     "id": "p3",
-    "title": "Media Search Website",
+    "title": "Smart Media Search Web",
     "description": "Search and download high quality images, videos, gifs using external APIs.",
-    "tech": ["React", "Vite", "Tailwind"],
+    "tech": ["React", "Vite", "Tailwind", "TypeScript", "Gemini API Integration"],
     "repo": "https://github.com/Sarthaksk26/Media-Search",
     "live": "https://media-search-five.vercel.app/",
-    "category": "practice",
+    "category": "client",
     "featured": false
   },
   {

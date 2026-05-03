@@ -3,6 +3,7 @@ import { Github, ExternalLink, ArrowRight } from 'lucide-react';
 
 import { Project } from '../../types/project';
 import { cn } from '../../utils/cn';
+import { getTechIdentity } from '../../utils/gradientMap';
 import TechTag from './TechTag';
 
 interface ProjectCardProps {
@@ -37,8 +38,8 @@ const ProjectCard = React.memo(
     const displayedTech = isCompact ? project.tech.slice(0, 3) : project.tech;
     const techOverflow = project.tech.length - displayedTech.length;
 
-    const fallbackImage = `https://placehold.co/800x450/f59e0b/ffffff?text=${encodeURIComponent(project.title)}`;
-    const imageUrl = project.image || fallbackImage;
+    const identity = getTechIdentity(project.tech);
+    const IdentityIcon = identity.icon;
 
     return (
       <div
@@ -57,20 +58,24 @@ const ProjectCard = React.memo(
           {/* Shine Sweep */}
           <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-25deg] pointer-events-none" />
 
-          {/* Project Image */}
+          {/* Project Gradient Header */}
           <div
             className={cn(
-              'relative mb-6 overflow-hidden rounded-2xl',
-              isCompact ? 'aspect-[16/9]' : 'aspect-video'
+              'relative mb-6 overflow-hidden rounded-2xl flex items-center justify-center bg-gradient-to-br',
+              identity.from,
+              identity.to,
+              isCompact ? 'aspect-[21/9]' : 'aspect-[21/9] sm:aspect-[16/5]'
             )}
           >
-            <img
-              src={imageUrl}
-              alt={project.title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
-              loading="lazy"
+            {/* Overlay Patterns */}
+            <div className="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNmZmZmZmYiLz48L3N2Zz4=')] [background-size:24px_24px]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-slate-950/20 to-transparent" />
+            
+            <IdentityIcon 
+              size={isCompact ? 48 : 80} 
+              className="text-white/30 group-hover/card:scale-110 group-hover/card:rotate-6 transition-transform duration-700 relative z-10 drop-shadow-2xl" 
+              strokeWidth={1.5}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500" />
 
             {showLiveBadge && (
               <div className="absolute top-4 left-4 z-20 bg-green-500/90 text-white rounded-full px-3 py-1 text-xs font-medium backdrop-blur-sm shadow-lg flex items-center gap-1.5 animate-fade-slide-up">
@@ -78,6 +83,11 @@ const ProjectCard = React.memo(
                 Live
               </div>
             )}
+            
+            {/* Floating identity label */}
+            <div className="absolute bottom-4 right-4 z-20 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white text-[10px] font-bold tracking-widest uppercase shadow-xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
+              {identity.label}
+            </div>
           </div>
 
           {/* Content Wrapper */}
@@ -126,29 +136,33 @@ const ProjectCard = React.memo(
                 >
                   <Github size={20} />
                 </a>
+                {project.live && (
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:scale-115 transition-all duration-300"
+                    aria-label={`View Live Demo of ${project.title}`}
+                  >
+                    <ExternalLink size={20} />
+                  </a>
+                )}
+              </div>
+
+              {project.live && (
                 <a
                   href={project.live}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:scale-115 transition-all duration-300"
-                  aria-label={`View Live Demo of ${project.title}`}
+                  className="text-[10px] font-bold text-accent uppercase tracking-widest flex items-center gap-2 group/btn cursor-pointer"
                 >
-                  <ExternalLink size={20} />
+                  Explore Project
+                  <ArrowRight
+                    size={14}
+                    className="group-hover/btn:translate-x-1 transition-transform"
+                  />
                 </a>
-              </div>
-
-              <a
-                href={project.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[10px] font-bold text-accent uppercase tracking-widest flex items-center gap-2 group/btn"
-              >
-                Explore Project
-                <ArrowRight
-                  size={14}
-                  className="group-hover/btn:translate-x-1 transition-transform"
-                />
-              </a>
+              )}
             </div>
           </div>
         </article>
