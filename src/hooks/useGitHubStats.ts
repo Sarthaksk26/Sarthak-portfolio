@@ -1,12 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import {
-  GitHubStats,
-  GitHubRepo,
-  GitHubEvent,
-  LanguageStat,
-  ActivityEvent,
-} from '../types/github';
+import { GitHubStats, GitHubRepo, GitHubEvent, LanguageStat, ActivityEvent } from '../types/github';
 
 export const useGitHubStats = (username: string) => {
   const [stats, setStats] = useState<GitHubStats>({

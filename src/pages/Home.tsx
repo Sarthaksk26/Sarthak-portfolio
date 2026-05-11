@@ -265,8 +265,6 @@ export default function Home() {
         </div>
       </section>
 
-
-
       {/* GitHub Pulse Section */}
       <GitHubPulse />
 
