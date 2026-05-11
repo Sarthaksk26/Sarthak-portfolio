@@ -61,9 +61,9 @@ export const useAIChat = () => {
       // Initialize Gemini AI SDK
       const genAI = new GoogleGenerativeAI(apiKey);
 
-      // Use the model (SDK handles the versioning and endpoint)
+      // Use the latest model (Older models like 1.5 may be retired)
       const model = genAI.getGenerativeModel({
-        model: 'gemini-1.5-flash',
+        model: 'gemini-2.0-flash',
         generationConfig: {
           temperature: 0.7,
           topP: 0.95,
