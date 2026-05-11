@@ -61,17 +61,7 @@ export const useAIChat = () => {
       // Initialize Gemini AI SDK
       const genAI = new GoogleGenerativeAI(apiKey);
       
-      // DYNAMIC MODEL SELECTION: Try to find any available model that supports generation
-      // This avoids "Not Found" or "Limit 0" errors by picking what's actually available to the user
-      let modelId = 'gemini-1.5-flash'; // Default fallback
-      
-      try {
-        // We use a small list of preferred models in order of performance/cost
-        const preferredModels = ['gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-1.5-pro', 'gemini-pro'];
-        modelId = preferredModels[0]; // Start with best
-      } catch {
-        // Fallback already set
-      }
+      const modelId = 'gemini-1.5-flash';
 
       const model = genAI.getGenerativeModel({ 
         model: modelId,
