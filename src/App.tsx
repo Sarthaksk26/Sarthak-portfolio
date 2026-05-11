@@ -3,7 +3,6 @@ import React, { Suspense, lazy } from 'react';
 import Layout from './components/layout/Layout';
 import CustomCursor from './components/ui/CustomCursor';
 import ErrorBoundary from './components/ui/ErrorBoundary';
-import { AIChatbot } from './components/ui/AIChatbot';
 
 const Home = lazy(() => import('./pages/Home'));
 
@@ -11,7 +10,6 @@ export default function App() {
   return (
     <>
       <CustomCursor />
-      <AIChatbot />
       <Layout>
         <ErrorBoundary>
           <Suspense
