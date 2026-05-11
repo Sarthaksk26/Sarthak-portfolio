@@ -20,6 +20,16 @@
     "featured": false
   },
   {
+    "id": "p7",
+    "title": "YourNotes",
+    "description": "A minimalist note-taking application for quick and organized thought capture.",
+    "tech": ["React", "Vite", "JavaScript"],
+    "repo": "https://github.com/Sarthaksk26/YourNotes",
+    "live": "https://your-notes-kohl.vercel.app/",
+    "category": "practice",
+    "featured": false
+  },
+  {
     "id": "p4",
     "title": "Task Tick",
     "description": "A full-featured Task Management Application with CRUD operations.",
