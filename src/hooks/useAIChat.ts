@@ -73,9 +73,15 @@ export const useAIChat = () => {
       );
 
       const data = await response.json();
+
+      if (data.error) {
+        console.error('Gemini API Error:', data.error);
+        throw new Error(data.error.message || 'API Error');
+      }
+
       const aiResponse =
         data.candidates?.[0]?.content?.parts?.[0]?.text ||
-        "I'm sorry, I encountered an error processing your request.";
+        "I'm sorry, I encountered an error processing your request. Please check your API key or try again later.";
 
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -84,11 +90,12 @@ export const useAIChat = () => {
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
-    } catch {
+    } catch (err) {
+      console.error('Chat Error:', err);
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: "Sorry, I'm having trouble connecting to my brain right now.",
+        content: `Sorry, I'm having trouble connecting to my brain right now. (${(err as Error).message})`,
       };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
