@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 
-interface GitHubStats {
-  publicRepos: number;
-  totalStars: number;
-  topLanguages: { name: string; percentage: number }[];
-  recentActivity: { id: string; type: string; repo: string; date: string }[];
-  loading: boolean;
-  error: string | null;
-}
+import {
+  GitHubStats,
+  GitHubRepo,
+  GitHubEvent,
+  LanguageStat,
+  ActivityEvent,
+} from '../types/github';
 
 export const useGitHubStats = (username: string) => {
   const [stats, setStats] = useState<GitHubStats>({
@@ -32,24 +31,21 @@ export const useGitHubStats = (username: string) => {
           `https://api.github.com/users/${username}/repos?per_page=100&sort=updated`
         );
         if (!reposRes.ok) throw new Error('Failed to fetch repos');
-        const reposData = await reposRes.json();
+        const reposData: GitHubRepo[] = await reposRes.json();
 
         // Calculate total stars
-        const totalStars = reposData.reduce(
-          (acc: number, repo: { stargazers_count: number }) => acc + repo.stargazers_count,
-          0
-        );
+        const totalStars = reposData.reduce((acc, repo) => acc + repo.stargazers_count, 0);
 
         // Calculate language breakdown
         const languages: Record<string, number> = {};
-        reposData.forEach((repo: { language: string | null }) => {
+        reposData.forEach((repo) => {
           if (repo.language) {
             languages[repo.language] = (languages[repo.language] || 0) + 1;
           }
         });
 
         const totalLanguageRepos = Object.values(languages).reduce((a, b) => a + b, 0);
-        const topLanguages = Object.entries(languages)
+        const topLanguages: LanguageStat[] = Object.entries(languages)
           .map(([name, count]) => ({
             name,
             percentage: Math.round((count / totalLanguageRepos) * 100),
@@ -61,17 +57,15 @@ export const useGitHubStats = (username: string) => {
         const eventsRes = await fetch(
           `https://api.github.com/users/${username}/events/public?per_page=5`
         );
-        let recentActivity = [];
+        let recentActivity: ActivityEvent[] = [];
         if (eventsRes.ok) {
-          const eventsData = await eventsRes.json();
-          recentActivity = eventsData.map(
-            (event: { id: string; type: string; repo: { name: string }; created_at: string }) => ({
-              id: event.id,
-              type: event.type,
-              repo: event.repo.name,
-              date: new Date(event.created_at).toLocaleDateString(),
-            })
-          );
+          const eventsData: GitHubEvent[] = await eventsRes.json();
+          recentActivity = eventsData.map((event) => ({
+            id: event.id,
+            type: event.type,
+            repo: event.repo.name,
+            date: new Date(event.created_at).toLocaleDateString(),
+          }));
         }
 
         setStats({

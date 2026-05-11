@@ -59,51 +59,36 @@ const ProjectCard = React.memo(
           {/* Shine Sweep */}
           <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-25deg] pointer-events-none" />
 
-          {/* Project Gradient Header */}
-          <div
-            className={cn(
-              'relative mb-6 overflow-hidden rounded-2xl flex items-center justify-center bg-gradient-to-br',
-              identity.from,
-              identity.to,
-              isCompact ? 'aspect-[21/9]' : 'aspect-[21/9] sm:aspect-[16/5]'
-            )}
-          >
-            {/* Overlay Patterns */}
-            <div className="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNmZmZmZmYiLz48L3N2Zz4=')] [background-size:24px_24px]" />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-slate-950/20 to-transparent" />
-
-            <IdentityIcon
-              size={isCompact ? 48 : 80}
-              className="text-white/30 group-hover/card:scale-110 group-hover/card:rotate-6 transition-transform duration-700 relative z-10 drop-shadow-2xl"
-              strokeWidth={1.5}
-            />
-
-            {showLiveBadge && (
-              <div className="absolute top-4 left-4 z-20 bg-green-500/90 text-white rounded-full px-3 py-1 text-xs font-medium backdrop-blur-sm shadow-lg flex items-center gap-1.5 animate-fade-slide-up">
-                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                Live
-              </div>
-            )}
-
-            {/* Floating identity label */}
-            <div className="absolute bottom-4 right-4 z-20 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white text-[10px] font-bold tracking-widest uppercase shadow-xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
-              {identity.label}
-            </div>
-          </div>
-
           {/* Content Wrapper */}
           <div className="relative z-10 flex flex-col h-full">
             <header className="mb-4 flex justify-between items-start">
               <div className="w-full">
-                <span className="inline-block px-3 py-1 bg-accent/10 border border-accent/20 rounded-full text-[10px] font-bold text-accent uppercase tracking-widest mb-3">
-                  {project.category}
-                </span>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="inline-block px-3 py-1 bg-accent/10 border border-accent/20 rounded-full text-[10px] font-bold text-accent uppercase tracking-widest">
+                    {project.category}
+                  </span>
+                  {showLiveBadge && (
+                    <div className="bg-green-500/90 text-white rounded-full px-2 py-0.5 text-[10px] font-medium backdrop-blur-sm shadow-sm flex items-center gap-1">
+                      <span className="w-1 h-1 rounded-full bg-white animate-pulse" />
+                      Live
+                    </div>
+                  )}
+                </div>
                 <h3
                   className={cn(
-                    'font-display font-bold text-slate-900 dark:text-white group-hover:text-accent transition-colors',
+                    'font-display font-bold text-slate-900 dark:text-white group-hover:text-accent transition-colors flex items-center gap-3',
                     isCompact ? 'text-lg' : 'text-2xl sm:text-3xl'
                   )}
                 >
+                  <div
+                    className={cn(
+                      'p-2 rounded-xl bg-gradient-to-br text-white',
+                      identity.from,
+                      identity.to
+                    )}
+                  >
+                    <IdentityIcon size={isCompact ? 18 : 24} />
+                  </div>
                   {project.title}
                 </h3>
               </div>

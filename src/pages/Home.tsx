@@ -8,7 +8,6 @@ import TechDNA from '@/components/sections/TechDNA';
 import projectsData from '../data/projects.json';
 import ProjectCard from '../components/ui/ProjectCard';
 import GitHubPulse from '../components/sections/GitHubPulse';
-import KnowledgeLab from '../components/sections/KnowledgeLab';
 import { Project } from '../types/project';
 import SEO from '../components/ui/SEO';
 import { useMagnetic } from '../hooks/useMagnetic';
@@ -266,8 +265,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Knowledge Lab Section */}
-      <KnowledgeLab />
+
 
       {/* GitHub Pulse Section */}
       <GitHubPulse />

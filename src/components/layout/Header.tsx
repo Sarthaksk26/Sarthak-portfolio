@@ -11,7 +11,6 @@ const NAV_LINKS = [
   { name: 'Home', href: 'hero' },
   { name: 'Journey', href: 'journey' },
   { name: 'Projects', href: 'projects' },
-  { name: 'Knowledge', href: 'knowledge-lab' },
   { name: 'Pulse', href: 'pulse' },
   { name: 'Skills', href: 'skills' },
   { name: 'About', href: 'about' },
@@ -32,7 +31,8 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
-  const activeSection = useActiveSection(NAV_LINKS.map((link) => link.href));
+  const sectionIds = React.useMemo(() => NAV_LINKS.map((link) => link.href), []);
+  const activeSection = useActiveSection(sectionIds);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
