@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 export interface Message {
   id: string;
@@ -43,12 +44,13 @@ export const useAIChat = () => {
     setMessages((prev) => [...prev, userMessage]);
     setIsLoading(true);
 
-    if (!apiKey || apiKey === 'your_api_key_here') {
+    if (!apiKey || apiKey === 'your_api_key_here' || !apiKey) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       const errorMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: 'I need an API key to think! Please add VITE_GEMINI_API_KEY to your .env file.',
+        content:
+          'I need an API key to think! Please add VITE_GEMINI_API_KEY to your environment variables.',
       };
       setMessages((prev) => [...prev, errorMsg]);
       setIsLoading(false);
@@ -56,41 +58,28 @@ export const useAIChat = () => {
     }
 
     try {
-      // Direct call to Gemini API
-      const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-goog-api-key': apiKey, // Redundant but safer for some environments
-          },
-          body: JSON.stringify({
-            contents: [
-              {
-                parts: [{ text: SYSTEM_INSTRUCTION + '\n\nUser Question: ' + content }],
-              },
-            ],
-            generationConfig: {
-              temperature: 0.7,
-              topK: 40,
-              topP: 0.95,
-              maxOutputTokens: 1024,
-            },
-          }),
-        }
-      );
+      // Initialize Gemini AI SDK
+      const genAI = new GoogleGenerativeAI(apiKey);
 
-      const data = await response.json();
+      // Use the model (SDK handles the versioning and endpoint)
+      const model = genAI.getGenerativeModel({
+        model: 'gemini-1.5-flash',
+        generationConfig: {
+          temperature: 0.7,
+          topP: 0.95,
+          topK: 40,
+          maxOutputTokens: 1024,
+        },
+      });
 
-      if (data.error) {
-        console.error('Gemini API Error:', data.error);
-        throw new Error(data.error.message || 'API Error');
+      const prompt = `${SYSTEM_INSTRUCTION}\n\nUser Question: ${content}`;
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      const aiResponse = response.text();
+
+      if (!aiResponse) {
+        throw new Error('No response from AI');
       }
-
-      const aiResponse =
-        data.candidates?.[0]?.content?.parts?.[0]?.text ||
-        "I'm sorry, I encountered an error processing your request. Please check your API key or try again later.";
 
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
