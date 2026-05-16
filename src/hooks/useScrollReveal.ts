@@ -9,9 +9,10 @@ interface RevealOptions {
 export const useScrollReveal = (options: RevealOptions = {}) => {
   const { threshold = 0.15, rootMargin = '0px 0px -50px 0px', once = true } = options;
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const elementsRef = useRef<HTMLElement[]>([]);
 
   useEffect(() => {
-    // Only initialize the observer once (or when options change)
+    // Initialize the observer
     observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -31,6 +32,11 @@ export const useScrollReveal = (options: RevealOptions = {}) => {
       { threshold, rootMargin }
     );
 
+    // Observe any elements that were registered before the observer was created
+    elementsRef.current.forEach((el) => {
+      observerRef.current?.observe(el);
+    });
+
     return () => {
       observerRef.current?.disconnect();
     };
@@ -38,8 +44,12 @@ export const useScrollReveal = (options: RevealOptions = {}) => {
 
   // Use a callback ref to handle elements being added/removed dynamically
   const addToRefs = useCallback((el: HTMLElement | null) => {
-    if (el && observerRef.current) {
-      observerRef.current.observe(el);
+    if (el && !elementsRef.current.includes(el)) {
+      elementsRef.current.push(el);
+      // If observer is already initialized, observe immediately
+      if (observerRef.current) {
+        observerRef.current.observe(el);
+      }
     }
   }, []);
 
