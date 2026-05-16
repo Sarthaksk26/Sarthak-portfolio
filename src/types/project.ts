@@ -6,6 +6,7 @@ export interface Project {
   live: string;
   repo: string;
   image?: string;
+  icon?: string;
   category: 'client' | 'practice';
   featured: boolean;
   readmeUrl?: string;

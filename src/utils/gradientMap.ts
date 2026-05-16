@@ -13,8 +13,8 @@ export const getTechIdentity = (tech: string[]): TechGradient => {
 
   if (t.includes('react') || t.includes('next.js')) {
     return {
-      from: 'from-indigo-500',
-      to: 'to-violet-600',
+      from: 'from-blue-500',
+      to: 'to-indigo-600',
       icon: MonitorPlay,
       label: 'React / UI',
     };
@@ -29,8 +29,8 @@ export const getTechIdentity = (tech: string[]): TechGradient => {
   }
   if (t.includes('typescript') || t.includes('ts')) {
     return {
-      from: 'from-blue-500',
-      to: 'to-cyan-600',
+      from: 'from-blue-400',
+      to: 'to-blue-600',
       icon: Code2,
       label: 'TypeScript',
     };
@@ -53,8 +53,8 @@ export const getTechIdentity = (tech: string[]): TechGradient => {
   }
   if (t.includes('vite') || t.includes('framer motion')) {
     return {
-      from: 'from-fuchsia-500',
-      to: 'to-pink-600',
+      from: 'from-indigo-400',
+      to: 'to-blue-500',
       icon: Zap,
       label: 'Modern Tooling',
     };

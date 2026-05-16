@@ -82,12 +82,22 @@ const ProjectCard = React.memo(
                 >
                   <div
                     className={cn(
-                      'p-2 rounded-xl bg-gradient-to-br text-white',
-                      identity.from,
-                      identity.to
+                      'p-2 rounded-xl flex items-center justify-center overflow-hidden',
+                      project.icon
+                        ? 'bg-white/5 border border-white/10'
+                        : cn('bg-gradient-to-br text-white shadow-lg', identity.from, identity.to)
                     )}
                   >
-                    <IdentityIcon size={isCompact ? 18 : 24} />
+                    {project.icon ? (
+                      <img
+                        src={project.icon}
+                        alt={project.title}
+                        className="w-full h-full object-contain"
+                        style={{ width: isCompact ? 24 : 32, height: isCompact ? 24 : 32 }}
+                      />
+                    ) : (
+                      <IdentityIcon size={isCompact ? 18 : 24} />
+                    )}
                   </div>
                   {project.title}
                 </h3>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Mail, ChevronDown, Copy, Check, Github, ArrowRight } from 'lucide-react';
+import { Mail, Copy, Check, Github, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import ExperienceSection from '@/components/sections/Experience';
@@ -76,51 +76,40 @@ export default function Home() {
   const practiceProjects = (projectsData as Project[]).filter((p) => p.category === 'practice');
 
   return (
-    <div className="space-y-20 sm:space-y-24">
+    <div className="flex flex-col">
       <SEO
-        title="Home"
-        description="Software Engineer at Hexaware Technologies. Expert in React and modern UI engineering."
+        title="Sarthak"
+        description="Software Engineer at Hexaware Technologies Limited. Frontend QA & UI Validation specialist."
       />
 
       <section
         id="hero"
-        className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden"
+        className="relative min-h-[85vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden pt-20"
       >
         <div className="noise-overlay" />
         <ParticleField />
 
-        <FloatingBadge className="top-1/4 right-[10%] sm:right-[15%]" delay={0}>
+        <FloatingBadge className="hidden sm:block top-1/4 right-[10%] sm:right-[15%]" delay={0}>
           React 19
         </FloatingBadge>
-        <FloatingBadge className="top-1/2 left-[5%] sm:left-[10%]" delay={2}>
+        <FloatingBadge className="hidden sm:block top-1/2 left-[5%] sm:left-[10%]" delay={2}>
           TypeScript
         </FloatingBadge>
-        <FloatingBadge className="bottom-1/4 right-[5%] sm:right-[10%]" delay={4}>
+        <FloatingBadge className="hidden sm:block bottom-1/4 right-[5%] sm:right-[10%]" delay={4}>
           Open Source
         </FloatingBadge>
 
         <div className="max-w-5xl relative z-10 space-y-8">
           {/* Personalized Greeting */}
           <div className="flex justify-center items-center gap-2 mb-4">
-            {!visitorContext.loading && (
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="px-4 py-1.5 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-sm font-medium text-slate-600 dark:text-slate-300"
-              >
-                {visitorContext.emoji} {visitorContext.greeting}
-                {visitorContext.city && visitorContext.country && (
-                  <span>
-                    {' '}
-                    from{' '}
-                    <strong className="text-slate-900 dark:text-white">
-                      {visitorContext.city}, {visitorContext.country}
-                    </strong>
-                  </span>
-                )}
-                <span className="opacity-70"> — welcome to my portfolio.</span>
-              </motion.div>
-            )}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm font-medium text-slate-300"
+            >
+              📍 Based in <strong className="text-white">Navi Mumbai</strong>
+              <span className="opacity-70"> — welcome to my portfolio.</span>
+            </motion.div>
           </div>
 
           <div className="h-8 overflow-hidden">
@@ -137,11 +126,11 @@ export default function Home() {
             </AnimatePresence>
           </div>
 
-          <h1 className="font-display font-bold leading-tight">
-            {['Hi,', "I'm", 'Sarthak', 'Kumbhar'].map((word, i) => (
+          <h1 className="font-display font-bold leading-[1.1] py-4">
+            {['Hi,', "I'm", 'Sarthak'].map((word, i) => (
               <span
                 key={i}
-                className="inline-block stagger-item text-[clamp(2.5rem,8vw,4.5rem)] mr-[0.3em] bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent"
+                className="inline-block stagger-item text-[clamp(2.5rem,8vw,5rem)] mr-[0.3em] bg-gradient-to-r from-accent to-indigo-400 bg-clip-text text-transparent"
                 style={{ animationDelay: `${i * 80}ms` }}
               >
                 {word}
@@ -181,29 +170,16 @@ export default function Home() {
           </div>
         </div>
 
-        <motion.a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-400 hover:text-accent transition-colors cursor-pointer"
-        >
-          <span className="text-[10px] uppercase tracking-[0.3em] font-bold">Explore</span>
-          <ChevronDown className="animate-bounce" size={24} />
-        </motion.a>
+
       </section>
 
       {/* Experience Section */}
       <ExperienceSection />
 
       {/* Projects Section */}
-      <section id="projects" className="container mx-auto px-4 max-w-7xl scroll-mt-24">
-        <div ref={reveal} data-reveal className="text-center mb-24">
-          <h2 className="text-4xl sm:text-6xl font-display font-bold mb-6 text-gradient">
+      <section id="projects" className="container mx-auto px-6 max-w-7xl scroll-mt-24 py-24 overflow-visible">
+        <div ref={reveal} data-reveal className="text-center mb-24 relative overflow-visible">
+          <h2 className="text-5xl sm:text-7xl font-display font-bold mb-6 text-gradient py-4 leading-[1.2]">
             Projects
           </h2>
           <p className="text-slate-500 text-lg max-w-2xl mx-auto">
@@ -272,7 +248,7 @@ export default function Home() {
       <TechDNA />
 
       {/* About Section */}
-      <section id="about" className="container mx-auto px-4 max-w-4xl scroll-mt-24">
+      <section id="about" className="container mx-auto px-4 max-w-4xl scroll-mt-24 py-24">
         <div
           ref={reveal}
           data-reveal="scale"
@@ -294,7 +270,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="container mx-auto px-4 max-w-4xl pb-16 text-center">
+      <section id="contact" className="container mx-auto px-4 max-w-4xl py-24 text-center">
         <div ref={reveal} data-reveal className="space-y-12">
           <div>
             <h2 className="text-5xl font-display font-bold mb-8 text-gradient">Let's Connect</h2>

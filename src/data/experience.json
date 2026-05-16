@@ -1,16 +1,17 @@
 [
   {
     "id": "e1",
-    "role": "Software Engineer L1",
-    "company": "Hexaware Technologies",
-    "period": "2024 – Present",
+    "role": "Software Engineer L1 — Frontend QA & UI Validation",
+    "company": "Hexaware Technologies Limited",
+    "period": "Aug 2024 – Present",
     "type": "work",
     "highlights": [
-      "Developing scalable frontend solutions with React 19",
-      "Optimizing application performance by 30% through code-splitting",
-      "Collaborating with cross-functional teams in an Agile environment"
+      "UI/UX Validation: Embedded within cross-functional React engineering squads in an Agile environment to validate UI/UX execution for a globally scaled, high-traffic web application.",
+      "Debugging & State Analysis: Analysed React component state, DOM behaviour, and network payloads to isolate and document complex frontend defects — accelerating bug-fix turnaround across sprint cycles.",
+      "Cross-Browser & Responsive Testing: Ensured responsive design correctness, cross-browser compatibility, and WCAG accessibility standards across multiple viewports before each production release.",
+      "Agile Collaboration: Participated actively in Sprint Planning and Retrospectives, gaining direct visibility into enterprise-grade frontend architecture decisions and user workflow design."
     ],
-    "tech": ["React", "Node.js", "MongoDB", "Tailwind"]
+    "tech": ["React", "UI/UX", "Agile", "QA Validation", "TypeScript"]
   },
   {
     "id": "e2",

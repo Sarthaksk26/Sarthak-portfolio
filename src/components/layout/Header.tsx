@@ -30,7 +30,6 @@ const SOCIAL_LINKS = [
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
   const sectionIds = React.useMemo(() => NAV_LINKS.map((link) => link.href), []);
   const activeSection = useActiveSection(sectionIds);
 
@@ -114,21 +113,6 @@ export default function Header() {
             </ul>
 
             <div className="flex items-center gap-4 border-l border-slate-200 dark:border-white/10 pl-8">
-              {/* Theme Toggle */}
-              <button
-                onClick={toggleTheme}
-                className="w-10 h-10 rounded-full border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-white/30 transition-all group"
-              >
-                <motion.div
-                  key={theme}
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  transition={{ type: 'spring', stiffness: 200 }}
-                >
-                  {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
-                </motion.div>
-              </button>
-
               {/* Hire Me CTA */}
               <button
                 onClick={() => scrollToSection('contact')}

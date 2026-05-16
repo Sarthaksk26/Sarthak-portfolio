@@ -18,7 +18,7 @@ export const TechDNA = () => {
 
       <div className="container mx-auto px-4 max-w-6xl relative z-10 flex flex-col items-center">
         <div className="text-center mb-20">
-          <h2 className="text-5xl font-display font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-accent to-purple-500 inline-flex items-center gap-4">
+          <h2 className="text-5xl font-display font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-accent to-indigo-400 inline-flex items-center gap-4">
             <Cpu className="text-accent" size={40} />
             Tech DNA
           </h2>
@@ -31,8 +31,8 @@ export const TechDNA = () => {
         {/* The Orbital System - DESKTOP */}
         <div className="hidden sm:flex relative w-[500px] h-[500px] md:w-[600px] md:h-[600px] items-center justify-center mb-16">
           {/* Center (You) */}
-          <div className="absolute z-50 w-24 h-24 bg-gradient-to-br from-accent to-purple-600 rounded-full flex items-center justify-center shadow-[0_0_60px_rgba(139,92,246,0.4)] border-4 border-[#0A0A0A]">
-            <span className="text-white font-display font-bold text-3xl tracking-tighter">SK</span>
+          <div className="absolute z-50 w-24 h-24 bg-gradient-to-br from-accent to-indigo-600 rounded-full flex items-center justify-center shadow-[0_0_60px_rgba(99,102,241,0.3)] border-4 border-[#0A0A0A]">
+            <span className="text-white font-display font-bold text-3xl tracking-tighter">S</span>
           </div>
 
           {/* Inner Ring Track */}

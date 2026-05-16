@@ -9,28 +9,28 @@ const Logo: React.FC<{ className?: string }> = ({ className = 'h-8' }) => {
         y="2"
         width="116"
         height="56"
-        rx="12"
-        fill="#0F172A"
-        stroke="#F59E0B"
+        rx="16"
+        fill="#0A0A0A"
+        stroke="#6366f1"
         strokeWidth="2"
       />
 
       {/* Terminal Prompt '>' */}
       <path
         d="M 25 20 L 35 30 L 25 40"
-        stroke="#F59E0B"
+        stroke="#6366f1"
         strokeWidth="4"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
 
-      {/* Initials 'SK' */}
-      <text x="45" y="42" fill="white" style={{ font: 'bold 28px Space Grotesk, sans-serif' }}>
-        SK
+      {/* Initials 'S' */}
+      <text x="45" y="42" fill="white" style={{ font: 'bold 32px Outfit, sans-serif' }}>
+        S
       </text>
 
       {/* Underscore/Cursor '_' */}
-      <rect x="90" y="40" width="12" height="4" fill="#F59E0B" className="animate-pulse" />
+      <rect x="75" y="40" width="16" height="4" fill="#6366f1" className="animate-pulse" />
     </svg>
   );
 };

@@ -9,7 +9,7 @@ interface SEOProps {
 const SEO: React.FC<SEOProps> = ({ title, description, keywords }) => {
   useEffect(() => {
     if (title) {
-      document.title = `${title} | Sarthak Kumbhar`;
+      document.title = `${title} | Sarthak`;
     }
 
     if (description) {

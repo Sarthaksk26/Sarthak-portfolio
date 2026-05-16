@@ -1,5 +1,13 @@
-<svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="56" height="56" rx="12" fill="#0F172A" stroke="#F59E0B" stroke-width="2"/>
-  <path d="M 15 20 L 25 30 L 15 40" stroke="#F59E0B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="32" y="42" fill="white" style="font: bold 24px sans-serif">SK</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Square background for better favicon visibility -->
+  <rect x="5" y="5" width="110" height="110" rx="24" fill="#0A0A0A" stroke="#6366f1" stroke-width="6"/>
+  
+  <!-- Terminal Prompt '>' -->
+  <path d="M 35 40 L 55 60 L 35 80" stroke="#6366f1" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Initials 'S' -->
+  <text x="65" y="80" fill="white" style="font: bold 64px Outfit, sans-serif">S</text>
+  
+  <!-- Underscore/Cursor '_' -->
+  <rect x="95" y="75" width="12" height="4" fill="#6366f1"/>
 </svg>
