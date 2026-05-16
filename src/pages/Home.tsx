@@ -108,7 +108,6 @@ export default function Home() {
               className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm font-medium text-slate-300"
             >
               📍 Based in <strong className="text-white">Navi Mumbai</strong>
-              <span className="opacity-70"> — welcome to my portfolio.</span>
             </motion.div>
           </div>
 
@@ -171,6 +170,28 @@ export default function Home() {
         </div>
 
 
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="container mx-auto px-4 max-w-4xl scroll-mt-24 py-24">
+        <div
+          ref={reveal}
+          data-reveal="scale"
+          className="glass p-8 sm:p-16 rounded-[3rem] relative overflow-hidden"
+        >
+          <div className="relative z-10">
+            <h2 className="text-4xl font-display font-bold mb-8 text-gradient">About Me</h2>
+            <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+              From Electrical Engineering to software development, my path has always been guided by
+              curiosity. I taught myself C++ and web development, and now work as a{' '}
+              <span className="font-bold text-accent">
+                Software Engineer at Hexaware Technologies
+              </span>
+              . Each step has been about growth — learning new skills, applying them to real-world
+              challenges, and preparing for the next stage of my journey as a developer.
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* Experience Section */}
@@ -247,27 +268,7 @@ export default function Home() {
       {/* Tech DNA Section */}
       <TechDNA />
 
-      {/* About Section */}
-      <section id="about" className="container mx-auto px-4 max-w-4xl scroll-mt-24 py-24">
-        <div
-          ref={reveal}
-          data-reveal="scale"
-          className="glass p-8 sm:p-16 rounded-[3rem] relative overflow-hidden"
-        >
-          <div className="relative z-10">
-            <h2 className="text-4xl font-display font-bold mb-8 text-gradient">About Me</h2>
-            <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-              From Electrical Engineering to software development, my path has always been guided by
-              curiosity. I taught myself C++ and web development, and now work as a{' '}
-              <span className="font-bold text-accent">
-                Software Engineer at Hexaware Technologies
-              </span>
-              . Each step has been about growth — learning new skills, applying them to real-world
-              challenges, and preparing for the next stage of my journey as a developer.
-            </p>
-          </div>
-        </div>
-      </section>
+
 
       {/* Contact Section */}
       <section id="contact" className="container mx-auto px-4 max-w-4xl py-24 text-center">
