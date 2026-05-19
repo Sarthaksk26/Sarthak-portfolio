@@ -181,15 +181,47 @@ export default function Home() {
         >
           <div className="relative z-10">
             <h2 className="text-4xl font-display font-bold mb-8 text-gradient">About Me</h2>
-            <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-              From Electrical Engineering to software development, my path has always been guided by
-              curiosity. I taught myself C++ and web development, and now work as a{' '}
-              <span className="font-bold text-accent">
-                Software Engineer at Hexaware Technologies
-              </span>
-              . Each step has been about growth — learning new skills, applying them to real-world
-              challenges, and preparing for the next stage of my journey as a developer.
-            </p>
+            <div className="space-y-6 text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+              <p>
+                My path to software development started a bit differently. I graduated with a degree in{' '}
+                <span className="font-semibold text-slate-900 dark:text-white">Electrical Engineering</span>
+                . However, my curiosity naturally pulled me toward writing code, leading me to teach myself
+                web development and transition into the tech industry.
+              </p>
+              <p>
+                Today, I work at{' '}
+                <span className="font-semibold text-slate-900 dark:text-white">Hexaware Technologies</span> as
+                a <span className="font-bold text-accent">Software Engineer Level 1</span>. While that is my
+                official title, my daily responsibilities are entirely focused on{' '}
+                <span className="font-semibold text-slate-900 dark:text-white">
+                  manual testing and frontend UI validation
+                </span>
+                . This role has been the ultimate crash course in building better software. By spending my
+                days isolating complex bugs and analyzing React component states, I have learned exactly what
+                causes an application to break under pressure. I know how to ensure responsive design
+                correctness and meet strict accessibility standards before a product ever goes live.
+              </p>
+              <p>
+                I take this deep understanding of software quality and apply it directly to my own
+                development work. Outside of the office, I focus heavily on writing{' '}
+                <span className="font-semibold text-slate-900 dark:text-white">
+                  clean, performance-first code
+                </span>
+                . I have built a high-performance React 18 application that achieves a{' '}
+                <span className="font-semibold text-slate-900 dark:text-white">95+ Lighthouse score</span>. I
+                also developed a smart media discovery platform powered by{' '}
+                <span className="font-semibold text-slate-900 dark:text-white">Gemini 2.0 Flash</span>.
+                Recently, I even managed the end-to-end delivery of a fully responsive portfolio website
+                for a freelance client.
+              </p>
+              <p>
+                My background gives me a unique edge. I have the logical foundation of an engineer, the
+                critical eye of a QA tester, and a genuine passion for modern web development. I am now
+                looking to bring this combination of{' '}
+                <span className="font-bold text-accent">testing rigor and hands-on coding experience</span> to
+                a <span className="font-bold text-accent">full-time frontend engineering role</span>.
+              </p>
+            </div>
           </div>
         </div>
       </section>
