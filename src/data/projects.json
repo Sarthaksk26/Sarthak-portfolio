@@ -16,6 +16,7 @@
     "description": "A highly responsive, premium portfolio website designed and developed for an Associate Electrical Engineer at Worley. Displays interactive timelines, professional project deep-dives, energy sector publications, and patented engineering instrumentation.",
     "tech": ["React", "Vite", "Tailwind", "Framer Motion", "TypeScript"],
     "live": "https://patilganesh0369.vercel.app/",
+    "icon": "/ganesh-icon.png",
     "category": "client",
     "featured": true
   },
