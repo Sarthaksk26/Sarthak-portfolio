@@ -11,6 +11,15 @@
     "featured": true
   },
   {
+    "id": "p2",
+    "title": "Ganesh Patil Portfolio",
+    "description": "A highly responsive, premium portfolio website designed and developed for an Associate Electrical Engineer at Worley. Displays interactive timelines, professional project deep-dives, energy sector publications, and patented engineering instrumentation.",
+    "tech": ["React", "Vite", "Tailwind", "Framer Motion", "TypeScript"],
+    "live": "https://patilganesh0369.vercel.app/",
+    "category": "client",
+    "featured": true
+  },
+  {
     "id": "p3",
     "title": "Smart Media Search Web",
     "description": "Search and download high quality images, videos, gifs using external APIs.",

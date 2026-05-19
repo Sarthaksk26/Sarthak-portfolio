@@ -4,7 +4,7 @@ export interface Project {
   description: string;
   tech: string[];
   live: string;
-  repo: string;
+  repo?: string;
   image?: string;
   icon?: string;
   category: 'client' | 'practice';

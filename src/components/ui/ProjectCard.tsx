@@ -123,15 +123,17 @@ const ProjectCard = React.memo(
             {/* Bottom Bar with Links */}
             <div className="mt-auto pt-6 border-t border-slate-200 dark:border-white/5 flex items-center justify-between">
               <div className="flex gap-4">
-                <a
-                  href={project.repo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:scale-115 transition-all duration-300"
-                  aria-label={`View GitHub Repository of ${project.title}`}
-                >
-                  <Github size={20} />
-                </a>
+                {project.repo && (
+                  <a
+                    href={project.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:scale-115 transition-all duration-300"
+                    aria-label={`View GitHub Repository of ${project.title}`}
+                  >
+                    <Github size={20} />
+                  </a>
+                )}
                 {project.live && (
                   <a
                     href={project.live}
