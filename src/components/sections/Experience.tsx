@@ -101,8 +101,8 @@ const ExperienceSection: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                </motion.div>
-              ))}
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
