@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Menu, X, Sun, Moon, ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
+import { Menu, X, ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import { useTheme } from '../../hooks/useTheme';
 import { useActiveSection } from '../../hooks/useActiveSection';
 import Logo from '../ui/Logo';
 import { cn } from '../../utils/cn';
@@ -12,7 +11,7 @@ const NAV_LINKS = [
   { name: 'Journey', href: 'journey' },
   { name: 'Projects', href: 'projects' },
   { name: 'Pulse', href: 'pulse' },
-  { name: 'Skills', href: 'skills' },
+  { name: 'Skills', href: 'tech-dna' },
   { name: 'About', href: 'about' },
   { name: 'Contact', href: 'contact' },
 ];
@@ -119,7 +118,11 @@ export default function Header() {
                 className="group px-6 py-2.5 bg-gradient-to-r from-accent to-indigo-700 text-white rounded-full text-sm font-bold shadow-lg shadow-accent/20 flex items-center gap-2 hover:shadow-accent/40 transition-all border border-accent/50"
               >
                 Hire Me
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                <ArrowRight
+                  size={16}
+                  aria-hidden="true"
+                  className="group-hover:translate-x-1 transition-transform"
+                />
               </button>
             </div>
           </nav>
@@ -127,6 +130,9 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(true)}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-nav"
+            aria-label="Open navigation menu"
             className="lg:hidden w-10 h-10 flex items-center justify-center text-slate-900 dark:text-white"
           >
             <Menu size={28} />
@@ -141,6 +147,7 @@ export default function Header() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            id="mobile-nav"
             className="fixed inset-0 z-[999] bg-white/95 dark:bg-[#0F0F0F]/95 backdrop-blur-2xl flex flex-col items-center justify-center p-12"
           >
             <button

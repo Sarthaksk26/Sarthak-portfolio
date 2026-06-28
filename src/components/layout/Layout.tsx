@@ -30,10 +30,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="text-center md:text-left flex flex-col items-center md:items-start gap-4">
               <Logo className="h-12 w-auto" />
               <div>
-                <h2 className="text-xl font-display font-bold text-white">
-                  Sarthak
-                </h2>
-                <p className="text-slate-500 text-sm">Software Engineer level 1 and Frontend Developer and QA</p>
+                <h2 className="text-xl font-display font-bold text-white">Sarthak</h2>
+                <p className="text-slate-500 text-sm">Frontend Developer · React Specialist</p>
               </div>
             </div>
 

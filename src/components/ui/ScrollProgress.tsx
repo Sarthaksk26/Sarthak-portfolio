@@ -1,26 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const ScrollProgress: React.FC = () => {
-  const [progress, setProgress] = useState(0);
+  const barRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const updateScroll = () => {
       const scrollHeight = document.body.scrollHeight - window.innerHeight;
-      if (scrollHeight > 0) {
-        setProgress((window.scrollY / scrollHeight) * 100);
+      if (scrollHeight > 0 && barRef.current) {
+        barRef.current.style.width = `${(window.scrollY / scrollHeight) * 100}%`;
       }
     };
-
-    window.addEventListener('scroll', updateScroll);
-    updateScroll(); // Initial check
-
+    window.addEventListener('scroll', updateScroll, { passive: true });
+    updateScroll();
     return () => window.removeEventListener('scroll', updateScroll);
   }, []);
 
   return (
     <div
-      className="fixed top-0 left-0 h-[2px] bg-accent z-[900] transition-all duration-150 ease-out"
-      style={{ width: `${progress}%` }}
+      ref={barRef}
+      className="fixed top-0 left-0 h-[2px] bg-accent z-[900]"
+      style={{ width: '0%', transition: 'width 150ms ease-out' }}
     />
   );
 };

@@ -51,6 +51,7 @@ const ProjectCard = React.memo(
         style={{ transform, transformStyle: 'preserve-3d' }}
       >
         <article
+          aria-label={`Project: ${project.title}`}
           className={cn(
             'h-full glass rounded-[2.5rem] border border-slate-200 dark:border-white/10 hover:border-accent/40 transition-all duration-500 relative z-10 overflow-hidden flex flex-col shadow-2xl group/card',
             isCompact ? 'p-4' : 'p-6 sm:p-10'
@@ -128,7 +129,7 @@ const ProjectCard = React.memo(
                     href={project.repo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:scale-115 transition-all duration-300"
+                    className="p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:scale-110 transition-all duration-300"
                     aria-label={`View GitHub Repository of ${project.title}`}
                   >
                     <Github size={20} />
@@ -139,7 +140,7 @@ const ProjectCard = React.memo(
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:scale-115 transition-all duration-300"
+                    className="p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:scale-110 transition-all duration-300"
                     aria-label={`View Live Demo of ${project.title}`}
                   >
                     <ExternalLink size={20} />

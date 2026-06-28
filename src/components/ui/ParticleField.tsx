@@ -57,6 +57,7 @@ class Particle {
 const ParticleField: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouse = useRef({ x: 0, y: 0, radius: 120 });
+  const initTimeoutRef = useRef<number>(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -71,7 +72,9 @@ const ParticleField: React.FC = () => {
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      init(); // Re-init on resize to match new dimensions
+      // debounce particle re-init to avoid GC thrash on fast resize
+      clearTimeout(initTimeoutRef.current);
+      initTimeoutRef.current = window.setTimeout(init, 150);
     };
 
     const init = () => {
@@ -104,6 +107,7 @@ const ParticleField: React.FC = () => {
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationFrameId);
+      clearTimeout(initTimeoutRef.current);
     };
   }, []);
 

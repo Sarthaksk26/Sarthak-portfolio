@@ -11,12 +11,12 @@ export const useActiveSection = (sectionIds: string[]) => {
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
               setActiveSection(id);
             }
           });
         },
-        { threshold: [0.1, 0.5, 0.8] }
+        { threshold: [0.1, 0.3, 0.5] }
       );
 
       observer.observe(element);

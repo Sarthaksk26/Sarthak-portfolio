@@ -14,19 +14,31 @@ interface ProjectModalProps {
 const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
   const [content, setContent] = useState<string>('');
   const [loading, setLoading] = useState(false);
+  const prevProjectIdRef = useRef<string | null>(null);
 
   useEffect(() => {
-    if (!project || !project.readmeUrl) return;
+    const currentProjectId = project?.id ?? null;
+    if (prevProjectIdRef.current !== currentProjectId) {
+      setContent('');
+      prevProjectIdRef.current = currentProjectId;
+    }
+  }, [project?.id]);
+
+  useEffect(() => {
+    if (!project?.readmeUrl) return;
+
+    const controller = new AbortController();
 
     const fetchReadme = async () => {
       setLoading(true);
       try {
-        const response = await fetch(project.readmeUrl!);
+        const response = await fetch(project.readmeUrl!, {
+          signal: controller.signal,
+        });
         if (!response.ok) throw new Error('Failed to fetch README');
-        const text = await response.text();
-        setContent(text);
+        setContent(await response.text());
       } catch (err) {
-        console.error(err);
+        if ((err as Error).name === 'AbortError') return;
         setContent(
           '> Failed to load project details. Please visit the GitHub repository directly.'
         );
@@ -36,6 +48,7 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
     };
 
     fetchReadme();
+    return () => controller.abort();
   }, [project]);
 
   // Lock body scroll when modal is open

@@ -12,7 +12,6 @@ import { Project } from '../types/project';
 import SEO from '../components/ui/SEO';
 import { useMagnetic } from '../hooks/useMagnetic';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { useVisitorContext } from '../hooks/useVisitorContext';
 import ParticleField from '../components/ui/ParticleField';
 
 const GREETING_WORDS = [
@@ -44,7 +43,8 @@ const FloatingBadge = React.memo(
 export default function Home() {
   const [emailCopied, setEmailCopied] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
-  const visitorContext = useVisitorContext();
+  // Visitor context available for future use
+  // const visitorContext = useVisitorContext();
 
   const myEmail = 'sarthakkumbhar26@gmail.com';
 
@@ -79,7 +79,7 @@ export default function Home() {
     <div className="flex flex-col">
       <SEO
         title="Sarthak"
-        description="Software Engineer at Hexaware Technologies Limited. Frontend QA & UI Validation specialist."
+        description="Frontend Developer specializing in React 19 and TypeScript. Building fast, accessible web experiences. Open to full-time frontend engineering roles."
       />
 
       <section
@@ -168,8 +168,6 @@ export default function Home() {
             </a>
           </div>
         </div>
-
-
       </section>
 
       {/* About Section */}
@@ -183,23 +181,29 @@ export default function Home() {
             <h2 className="text-4xl font-display font-bold mb-8 text-gradient">About Me</h2>
             <div className="space-y-6 text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
               <p>
-                My path to software development started a bit differently. I graduated with a degree in{' '}
-                <span className="font-semibold text-slate-900 dark:text-white">Electrical Engineering</span>
-                . However, my curiosity naturally pulled me toward writing code, leading me to teach myself
-                web development and transition into the tech industry.
+                My path to software development started a bit differently. I graduated with a degree
+                in{' '}
+                <span className="font-semibold text-slate-900 dark:text-white">
+                  Electrical Engineering
+                </span>
+                . However, my curiosity naturally pulled me toward writing code, leading me to teach
+                myself web development and transition into the tech industry.
               </p>
               <p>
                 Today, I work at{' '}
-                <span className="font-semibold text-slate-900 dark:text-white">Hexaware Technologies</span> as
-                a <span className="font-bold text-accent">Software Engineer Level 1</span>. While that is my
-                official title, my daily responsibilities are entirely focused on{' '}
+                <span className="font-semibold text-slate-900 dark:text-white">
+                  Hexaware Technologies
+                </span>{' '}
+                as a <span className="font-bold text-accent">Software Engineer Level 1</span>. While
+                that is my official title, my daily responsibilities are entirely focused on{' '}
                 <span className="font-semibold text-slate-900 dark:text-white">
                   manual testing and frontend UI validation
                 </span>
-                . This role has been the ultimate crash course in building better software. By spending my
-                days isolating complex bugs and analyzing React component states, I have learned exactly what
-                causes an application to break under pressure. I know how to ensure responsive design
-                correctness and meet strict accessibility standards before a product ever goes live.
+                . This role has been the ultimate crash course in building better software. By
+                spending my days isolating complex bugs and analyzing React component states, I have
+                learned exactly what causes an application to break under pressure. I know how to
+                ensure responsive design correctness and meet strict accessibility standards before
+                a product ever goes live.
               </p>
               <p>
                 I take this deep understanding of software quality and apply it directly to my own
@@ -208,18 +212,25 @@ export default function Home() {
                   clean, performance-first code
                 </span>
                 . I have built a high-performance React 18 application that achieves a{' '}
-                <span className="font-semibold text-slate-900 dark:text-white">95+ Lighthouse score</span>. I
-                also developed a smart media discovery platform powered by{' '}
-                <span className="font-semibold text-slate-900 dark:text-white">Gemini 2.0 Flash</span>.
-                Recently, I even managed the end-to-end delivery of a fully responsive portfolio website
-                for a freelance client.
+                <span className="font-semibold text-slate-900 dark:text-white">
+                  95+ Lighthouse score
+                </span>
+                . I also developed a smart media discovery platform powered by{' '}
+                <span className="font-semibold text-slate-900 dark:text-white">
+                  Gemini 2.0 Flash
+                </span>
+                . Recently, I even managed the end-to-end delivery of a fully responsive portfolio
+                website for a freelance client.
               </p>
               <p>
-                My background gives me a unique edge. I have the logical foundation of an engineer, the
-                critical eye of a QA tester, and a genuine passion for modern web development. I am now
-                looking to bring this combination of{' '}
-                <span className="font-bold text-accent">testing rigor and hands-on coding experience</span> to
-                a <span className="font-bold text-accent">full-time frontend engineering role</span>.
+                My background gives me a unique edge. I have the logical foundation of an engineer,
+                the critical eye of a QA tester, and a genuine passion for modern web development. I
+                am now looking to bring this combination of{' '}
+                <span className="font-bold text-accent">
+                  testing rigor and hands-on coding experience
+                </span>{' '}
+                to a{' '}
+                <span className="font-bold text-accent">full-time frontend engineering role</span>.
               </p>
             </div>
           </div>
@@ -230,7 +241,10 @@ export default function Home() {
       <ExperienceSection />
 
       {/* Projects Section */}
-      <section id="projects" className="container mx-auto px-6 max-w-7xl scroll-mt-24 py-24 overflow-visible">
+      <section
+        id="projects"
+        className="container mx-auto px-6 max-w-7xl scroll-mt-24 py-24 overflow-visible"
+      >
         <div ref={reveal} data-reveal className="text-center mb-24 relative overflow-visible">
           <h2 className="text-5xl sm:text-7xl font-display font-bold mb-6 text-gradient py-4 leading-[1.2]">
             Projects
@@ -299,8 +313,6 @@ export default function Home() {
 
       {/* Tech DNA Section */}
       <TechDNA />
-
-
 
       {/* Contact Section */}
       <section id="contact" className="container mx-auto px-4 max-w-4xl py-24 text-center">

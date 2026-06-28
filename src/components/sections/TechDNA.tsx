@@ -12,7 +12,7 @@ export const TechDNA = () => {
   const outerRing = useMemo(() => techStack.filter((t) => t.ring === 'outer'), []);
 
   return (
-    <section id="skills" className="py-24 relative overflow-hidden bg-[#0A0A0A]">
+    <section id="tech-dna" className="py-24 relative overflow-hidden bg-[#0A0A0A]">
       {/* Background grids */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
 
@@ -134,7 +134,7 @@ const OrbitalNode = ({
   tech: TechOrb;
   angle: number;
   radius: number;
-  setHoveredTech: (t: TechOrb | null) => void;
+  setHoveredTech: (t: TechOrb | null | ((prev: TechOrb | null) => TechOrb | null)) => void;
 }) => {
   // Convert polar to cartesian (% based from center)
   const rad = (angle * Math.PI) / 180;
@@ -149,9 +149,20 @@ const OrbitalNode = ({
         left: `calc(50% + ${x}%)`,
         transform: 'translate(-50%, -50%)',
       }}
+      tabIndex={0}
+      role="button"
+      aria-label={`${tech.name} — ${tech.usage}`}
       onMouseEnter={() => setHoveredTech(tech)}
       onMouseLeave={() => setHoveredTech(null)}
-      onClick={() => setHoveredTech(tech)}
+      onFocus={() => setHoveredTech(tech)}
+      onBlur={() => setHoveredTech(null)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          setHoveredTech((prev) => (prev?.name === tech.name ? null : tech));
+        }
+      }}
+      onClick={() => setHoveredTech((prev) => (prev?.name === tech.name ? null : tech))}
     >
       <div
         className="w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center text-xs md:text-sm font-bold text-white cursor-pointer shadow-lg transition-all duration-300 group-hover:scale-125 group-hover:z-50"

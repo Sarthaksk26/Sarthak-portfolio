@@ -2,27 +2,40 @@ import { useState, useEffect } from 'react';
 
 import { GitHubStats, GitHubRepo, GitHubEvent, LanguageStat, ActivityEvent } from '../types/github';
 
+// Simple in-memory cache (survives component remounts within the session)
+const statsCache = new Map<string, GitHubStats>();
+
 export const useGitHubStats = (username: string) => {
-  const [stats, setStats] = useState<GitHubStats>({
-    publicRepos: 0,
-    totalStars: 0,
-    topLanguages: [],
-    recentActivity: [],
-    loading: true,
-    error: null,
-  });
+  const [stats, setStats] = useState<GitHubStats>(
+    statsCache.get(username) ?? {
+      publicRepos: 0,
+      totalStars: 0,
+      topLanguages: [],
+      recentActivity: [],
+      loading: true,
+      error: null,
+    }
+  );
 
   useEffect(() => {
+    if (statsCache.has(username)) return; // already fetched
+
+    const controller = new AbortController();
+    const { signal } = controller;
+
     const fetchStats = async () => {
       try {
         // Fetch basic user info
-        const userRes = await fetch(`https://api.github.com/users/${username}`);
+        const userRes = await fetch(`https://api.github.com/users/${username}`, {
+          signal,
+        });
         if (!userRes.ok) throw new Error('Failed to fetch user data');
         const userData = await userRes.json();
 
         // Fetch repos (up to 100 per page to get all stats)
         const reposRes = await fetch(
-          `https://api.github.com/users/${username}/repos?per_page=100&sort=updated`
+          `https://api.github.com/users/${username}/repos?per_page=100&sort=updated`,
+          { signal }
         );
         if (!reposRes.ok) throw new Error('Failed to fetch repos');
         const reposData: GitHubRepo[] = await reposRes.json();
@@ -49,7 +62,8 @@ export const useGitHubStats = (username: string) => {
 
         // Fetch recent activity (Events API)
         const eventsRes = await fetch(
-          `https://api.github.com/users/${username}/events/public?per_page=5`
+          `https://api.github.com/users/${username}/events/public?per_page=5`,
+          { signal }
         );
         let recentActivity: ActivityEvent[] = [];
         if (eventsRes.ok) {
@@ -62,20 +76,25 @@ export const useGitHubStats = (username: string) => {
           }));
         }
 
-        setStats({
+        const result: GitHubStats = {
           publicRepos: userData.public_repos,
           totalStars,
           topLanguages,
           recentActivity,
           loading: false,
           error: null,
-        });
+        };
+
+        statsCache.set(username, result);
+        setStats(result);
       } catch (error) {
+        if ((error as Error).name === 'AbortError') return;
         setStats((prev) => ({ ...prev, loading: false, error: (error as Error).message }));
       }
     };
 
     fetchStats();
+    return () => controller.abort();
   }, [username]);
 
   return stats;
